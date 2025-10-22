@@ -11,9 +11,25 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <a href="/"><i class="fas fa-shield-alt"></i> CyberGuard</a>
+                <a href="/">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 2L26 8V16C26 22.627 21.627 27 15 27C8.373 27 4 22.627 4 16V8L16 2Z" fill="url(#gradient)" stroke="white" stroke-width="2"/>
+                        <path d="M12 16L15 19L20 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#06b6d4"/>
+                                <stop offset="50%" style="stop-color:#3b82f6"/>
+                                <stop offset="100%" style="stop-color:#8b5cf6"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    CyberGuard Pro
+                </a>
             </div>
-            <ul class="nav-menu">
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="/">Home</a></li>
                 <li><a href="/tips">Prevention Tips</a></li>
                 <% if (user) { %>
@@ -25,7 +41,7 @@
                         <li><a href="/report/new">Report Crime</a></li>
                         <li><a href="/reports">My Reports</a></li>
                     <% } %>
-                    <li><a href="/logout">Logout (<%= user.name %>)</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 <% } else { %>
                     <li><a href="/login">Login</a></li>
                     <li><a href="/register">Register</a></li>
