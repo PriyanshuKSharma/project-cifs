@@ -1,5 +1,51 @@
 // Main JavaScript file for the Cybercrime Prevention App
 
+// Enhanced navbar toggle function for all screen sizes
+function toggleMobileMenu() {
+    const navMenu = document.getElementById('navMenu');
+    const toggleBtn = document.querySelector('.mobile-menu-toggle');
+    const icon = toggleBtn.querySelector('i');
+    const isDesktop = window.innerWidth > 768;
+    
+    // Add pulse animation to button
+    toggleBtn.style.animation = 'none';
+    setTimeout(() => {
+        toggleBtn.style.animation = 'quantumButton 3s ease-in-out infinite';
+    }, 100);
+    
+    // Handle different behaviors for desktop vs mobile
+    if (isDesktop) {
+        // Desktop behavior - slide/fade toggle
+        if (navMenu.classList.contains('collapsed')) {
+            navMenu.classList.remove('collapsed');
+            navMenu.classList.add('active');
+        } else {
+            navMenu.classList.add('collapsed');
+            navMenu.classList.remove('active');
+        }
+    } else {
+        // Mobile behavior - dropdown toggle
+        navMenu.classList.toggle('active');
+    }
+    
+    // Enhanced icon transition with rotation
+    const isActive = navMenu.classList.contains('active') && !navMenu.classList.contains('collapsed');
+    
+    if (isActive) {
+        icon.style.transform = 'rotate(180deg)';
+        setTimeout(() => {
+            icon.className = 'fas fa-times';
+            icon.style.transform = 'rotate(0deg)';
+        }, 150);
+    } else {
+        icon.style.transform = 'rotate(-180deg)';
+        setTimeout(() => {
+            icon.className = 'fas fa-bars';
+            icon.style.transform = 'rotate(0deg)';
+        }, 150);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Auto-hide alerts after 5 seconds
     const alerts = document.querySelectorAll('.alert');
@@ -92,15 +138,58 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Mobile menu toggle (if needed)
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+    // Close navbar menu when clicking outside with enhanced animation
+    document.addEventListener('click', function(e) {
+        const navMenu = document.getElementById('navMenu');
+        const toggleBtn = document.querySelector('.mobile-menu-toggle');
+        const isDesktop = window.innerWidth > 768;
+        
+        if (navMenu && toggleBtn && !navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
+            const isMenuOpen = navMenu.classList.contains('active') && !navMenu.classList.contains('collapsed');
+            
+            if (isMenuOpen) {
+                if (isDesktop) {
+                    navMenu.classList.add('collapsed');
+                    navMenu.classList.remove('active');
+                } else {
+                    navMenu.classList.remove('active');
+                }
+                
+                const icon = toggleBtn.querySelector('i');
+                icon.style.transform = 'rotate(-180deg)';
+                setTimeout(() => {
+                    icon.className = 'fas fa-bars';
+                    icon.style.transform = 'rotate(0deg)';
+                }, 150);
+            }
+        }
+    });
     
-    if (mobileMenuToggle && navMenu) {
-        mobileMenuToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
+    // Handle window resize to reset navbar state
+    window.addEventListener('resize', function() {
+        const navMenu = document.getElementById('navMenu');
+        const toggleBtn = document.querySelector('.mobile-menu-toggle');
+        
+        if (navMenu && toggleBtn) {
+            navMenu.classList.remove('active', 'collapsed');
+            const icon = toggleBtn.querySelector('i');
+            icon.className = 'fas fa-bars';
+            icon.style.transform = 'rotate(0deg)';
+        }
+    });
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', function() {
+            const navMenu = document.getElementById('navMenu');
+            const toggleBtn = document.querySelector('.mobile-menu-toggle');
+            
+            if (navMenu && toggleBtn) {
+                navMenu.classList.remove('active');
+                toggleBtn.querySelector('i').className = 'fas fa-bars';
+            }
         });
-    }
+    });
 
     // Auto-resize textareas
     const textareas = document.querySelectorAll('textarea');
