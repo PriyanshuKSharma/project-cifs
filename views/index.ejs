@@ -1,0 +1,102 @@
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <section class="hero fade-in-up">
+        <div class="hero-content">
+            <h1>🛡️ Cybercrime Prevention Portal</h1>
+            <p>Your trusted partner in fighting cybercrime. Report incidents, track progress, and stay protected with expert guidance.</p>
+            <div class="hero-buttons">
+                <a href="/report/new" class="btn btn-primary">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Report Cybercrime
+                </a>
+                <a href="/tips" class="btn btn-secondary">
+                    <i class="fas fa-shield-alt"></i>
+                    Prevention Tips
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features fade-in-up">
+        <div class="container">
+            <h2>🚀 How We Protect You</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-file-shield"></i>
+                    <h3>Secure Reporting</h3>
+                    <p>Submit cybercrime reports through our encrypted, government-grade security system with complete confidentiality</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-search-location"></i>
+                    <h3>Real-time Tracking</h3>
+                    <p>Get instant updates on your case status with SMS and email notifications from our expert investigation team</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>AI-Powered Protection</h3>
+                    <p>Access personalized cybersecurity tips and threat alerts based on latest attack patterns and trends</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Expert Support</h3>
+                    <p>Connect with certified cybercrime specialists and law enforcement officers anytime, anywhere</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <% if (tips && tips.length > 0) { %>
+    <section class="tips-preview">
+        <div class="container">
+            <h2>Latest Prevention Tips</h2>
+            <div class="tips-grid">
+                <% tips.forEach(function(tip, index) { %>
+                <div class="tip-card fade-in-up" style="animation-delay: <%= index * 0.1 %>s;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
+                        <i class="fas fa-lightbulb" style="color: #f39c12;"></i>
+                        <h3 style="margin: 0;"><%= tip.title %></h3>
+                    </div>
+                    <p><%= tip.content.substring(0, 150) %>...</p>
+                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(102,126,234,0.2);">
+                        <small style="color: #667eea; font-weight: 500;">💡 Pro Tip</small>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            <div class="text-center">
+                <a href="/tips" class="btn btn-outline">View All Tips</a>
+            </div>
+        </div>
+    </section>
+    <% } %>
+
+    <section class="emergency glass fade-in-up" style="margin: 2rem; padding: 3rem; text-align: center;">
+        <div class="container">
+            <div class="emergency-content">
+                <h2>🚨 Emergency Response Center</h2>
+                <p style="margin-bottom: 2rem; font-size: 1.1rem; opacity: 0.9;">Immediate assistance available for urgent cybercrime incidents</p>
+                <div class="contact-info" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div class="contact-item" style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 16px; backdrop-filter: blur(10px);">
+                        <i class="fas fa-phone-alt" style="font-size: 2.5rem; color: #ff6b6b; margin-bottom: 1rem;"></i>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;">🔥 Cyber Crime Helpline</h4>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; font-weight: 600;">1930</p>
+                            <small style="color: rgba(255,255,255,0.7);">Available 24/7 • Toll Free</small>
+                        </div>
+                    </div>
+                    <div class="contact-item" style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 16px; backdrop-filter: blur(10px);">
+                        <i class="fas fa-envelope-open-text" style="font-size: 2.5rem; color: #4ecdc4; margin-bottom: 1rem;"></i>
+                        <div>
+                            <h4 style="color: white; margin-bottom: 0.5rem;">📧 Priority Email</h4>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600;">report@cybercrime.gov.in</p>
+                            <small style="color: rgba(255,255,255,0.7);">Response within 2 hours</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,189 @@
+<%- include('../partials/header') %>
+
+<main class="main-content">
+    <div class="container">
+        <div class="dashboard-header">
+            <h1><i class="fas fa-list"></i> Manage Reports</h1>
+            <p>Review and update cybercrime reports</p>
+        </div>
+
+        <div class="filter-section">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-status="all">All Reports</button>
+                <button class="filter-btn" data-status="pending">Pending</button>
+                <button class="filter-btn" data-status="review">Under Review</button>
+                <button class="filter-btn" data-status="resolved">Resolved</button>
+                <button class="filter-btn" data-status="rejected">Rejected</button>
+            </div>
+        </div>
+
+        <% if (reports.length > 0) { %>
+            <div class="reports-table-container">
+                <table class="reports-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Reporter</th>
+                            <th>Incident Type</th>
+                            <th>Date Reported</th>
+                            <th>Incident Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% reports.forEach(function(report) { %>
+                        <tr class="report-row" data-status="<%= report.status %>">
+                            <td>#<%= report.id %></td>
+                            <td>
+                                <div class="reporter-info">
+                                    <strong><%= report.user_name %></strong>
+                                    <small><%= report.user_email %></small>
+                                </div>
+                            </td>
+                            <td><%= report.incident_type %></td>
+                            <td><%= new Date(report.created_at).toLocaleDateString() %></td>
+                            <td><%= new Date(report.incident_date).toLocaleDateString() %></td>
+                            <td>
+                                <span class="status-badge status-<%= report.status %>">
+                                    <%= report.status.charAt(0).toUpperCase() + report.status.slice(1) %>
+                                </span>
+                            </td>
+                            <td>
+                                <a href="/admin/report/<%= report.id %>" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-eye"></i> Review
+                                </a>
+                            </td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <div class="empty-state">
+                <i class="fas fa-inbox"></i>
+                <h3>No reports found</h3>
+                <p>Cybercrime reports will appear here when submitted by users</p>
+            </div>
+        <% } %>
+    </div>
+</main>
+
+<style>
+.filter-section {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid #3498db;
+    background-color: transparent;
+    color: #3498db;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.reports-table-container {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    overflow-x: auto;
+}
+
+.reports-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reports-table th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+}
+
+.reports-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+}
+
+.reports-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.reporter-info strong {
+    display: block;
+    color: #2c3e50;
+}
+
+.reporter-info small {
+    color: #6c757d;
+}
+
+.report-row.hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .reports-table-container {
+        font-size: 0.875rem;
+    }
+    
+    .reports-table th,
+    .reports-table td {
+        padding: 0.5rem;
+    }
+    
+    .filter-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const reportRows = document.querySelectorAll('.report-row');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            const filterStatus = this.getAttribute('data-status');
+
+            reportRows.forEach(row => {
+                if (filterStatus === 'all' || row.getAttribute('data-status') === filterStatus) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+
+<%- include('../partials/footer') %>

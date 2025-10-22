@@ -1,0 +1,78 @@
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <div class="form-container">
+        <div class="form-header">
+            <h1><i class="fas fa-exclamation-triangle"></i> Report Cybercrime</h1>
+            <p>Provide detailed information about the cybercrime incident</p>
+        </div>
+
+        <form action="/report/new" method="POST" enctype="multipart/form-data" class="report-form">
+            <div class="form-section">
+                <h3>Incident Details</h3>
+                
+                <div class="form-group">
+                    <label for="incident_type">Incident Type *</label>
+                    <select id="incident_type" name="incident_type" required>
+                        <option value="">Select incident type</option>
+                        <option value="Phishing">Phishing</option>
+                        <option value="Identity Theft">Identity Theft</option>
+                        <option value="Financial Fraud">Financial Fraud</option>
+                        <option value="Cyberbullying">Cyberbullying</option>
+                        <option value="Ransomware">Ransomware</option>
+                        <option value="Social Media Fraud">Social Media Fraud</option>
+                        <option value="Online Shopping Fraud">Online Shopping Fraud</option>
+                        <option value="Email Scam">Email Scam</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="incident_date">Incident Date *</label>
+                    <input type="date" id="incident_date" name="incident_date" required max="<%= new Date().toISOString().split('T')[0] %>">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Detailed Description *</label>
+                    <textarea id="description" name="description" rows="6" required 
+                              placeholder="Please provide a detailed description of the incident, including what happened, when it occurred, and any relevant details..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="evidence">Evidence (Optional)</label>
+                    <input type="file" id="evidence" name="evidence" accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx">
+                    <small>Supported formats: JPG, PNG, GIF, PDF, DOC, DOCX (Max 5MB)</small>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i> Submit Report
+                </button>
+                <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+
+        <div class="help-section">
+            <h3>Need Help?</h3>
+            <div class="help-content">
+                <div class="help-item">
+                    <i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Emergency Helpline</h4>
+                        <p>Call 1930 for immediate assistance</p>
+                    </div>
+                </div>
+                <div class="help-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email Support</h4>
+                        <p>report@cybercrime.gov.in</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
