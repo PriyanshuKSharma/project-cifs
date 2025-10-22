@@ -22,7 +22,6 @@ services:
   buildCommand: |
     npm install
     mkdir -p uploads
-    node init-db.js
   startCommand: npm start
   autoDeployTrigger: commit
 
