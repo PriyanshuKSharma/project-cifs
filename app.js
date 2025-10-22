@@ -9,7 +9,9 @@ const PORT = process.env.PORT || 3000;
 
 // Initialize database on startup
 if (process.env.DATABASE_URL) {
-  require('./init-db');
+  setTimeout(() => {
+    require('./init-db');
+  }, 2000); // Wait 2 seconds for database to be ready
 }
 
 // View engine setup
@@ -48,11 +50,22 @@ app.use('/', authRoutes);
 app.use('/', userRoutes);
 app.use('/admin', adminRoutes);
 
+// Error handling
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
+  console.log('Environment:', process.env.NODE_ENV);
   if (process.env.DATABASE_URL) {
-    console.log('PostgreSQL database initialized');
-    console.log('Admin login: admin@cybercrime.gov / admin123');
+    console.log('PostgreSQL mode enabled');
+  } else {
+    console.log('MySQL mode enabled');
   }
 });

@@ -55,39 +55,48 @@ async function initializeDatabase() {
       )
     `);
 
-    // Create admin user
-    const hashedPassword = await bcrypt.hash('admin123', 10);
-    await pool.query(`
-      INSERT INTO users (name, email, password, role) 
-      VALUES ($1, $2, $3, $4)
-      ON CONFLICT (email) DO NOTHING
-    `, ['Admin', 'admin@cybercrime.gov', hashedPassword, 'admin']);
-
-    // Insert sample tips
-    const tips = [
-      ['Strong Passwords', 'Use complex passwords with a mix of uppercase, lowercase, numbers, and special characters.'],
-      ['Two-Factor Authentication', 'Enable 2FA on all your important accounts for extra security.'],
-      ['Phishing Awareness', 'Be cautious of suspicious emails, links, and attachments.'],
-      ['Software Updates', 'Keep your operating system and software updated with latest security patches.'],
-      ['Secure Networks', 'Avoid using public Wi-Fi for sensitive transactions. Use VPN when needed.']
-    ];
-
-    for (const [title, content] of tips) {
+    // Check if admin exists
+    const adminCheck = await pool.query('SELECT id FROM users WHERE email = $1', ['admin@cybercrime.gov']);
+    
+    if (adminCheck.rows.length === 0) {
+      // Create admin user
+      const hashedPassword = await bcrypt.hash('admin123', 10);
       await pool.query(`
-        INSERT INTO tips (title, content) 
-        VALUES ($1, $2)
-        ON CONFLICT DO NOTHING
-      `, [title, content]);
+        INSERT INTO users (name, email, password, role) 
+        VALUES ($1, $2, $3, $4)
+      `, ['Admin', 'admin@cybercrime.gov', hashedPassword, 'admin']);
+      console.log('Admin user created');
+    }
+
+    // Check if tips exist
+    const tipsCheck = await pool.query('SELECT COUNT(*) FROM tips');
+    
+    if (parseInt(tipsCheck.rows[0].count) === 0) {
+      // Insert sample tips
+      const tips = [
+        ['Strong Passwords', 'Use complex passwords with a mix of uppercase, lowercase, numbers, and special characters.'],
+        ['Two-Factor Authentication', 'Enable 2FA on all your important accounts for extra security.'],
+        ['Phishing Awareness', 'Be cautious of suspicious emails, links, and attachments.'],
+        ['Software Updates', 'Keep your operating system and software updated with latest security patches.'],
+        ['Secure Networks', 'Avoid using public Wi-Fi for sensitive transactions. Use VPN when needed.']
+      ];
+
+      for (const [title, content] of tips) {
+        await pool.query('INSERT INTO tips (title, content) VALUES ($1, $2)', [title, content]);
+      }
+      console.log('Sample tips created');
     }
 
     console.log('Database initialized successfully!');
-    console.log('Admin login: admin@cybercrime.gov / admin123');
 
   } catch (error) {
-    console.error('Database initialization error:', error);
+    console.error('Database initialization error:', error.message);
   } finally {
     await pool.end();
   }
 }
 
-initializeDatabase();
+// Run initialization
+initializeDatabase().catch(console.error);
+
+module.exports = initializeDatabase;
