@@ -108,18 +108,21 @@
 
 .add-tip-section,
 .existing-tips {
-    background: white;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .add-tip-section h2,
 .existing-tips h2 {
-    color: #2c3e50;
+    color: #ffffff !important;
     margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid #3498db;
+    border-bottom: 2px solid rgba(255, 0, 128, 0.6);
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
 }
 
 .tip-form {
@@ -136,24 +139,34 @@
 
 .tip-item {
     padding: 1.5rem;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    background-color: #f8f9fa;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.tip-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 0, 128, 0.3);
 }
 
 .tip-content h4 {
-    color: #2c3e50;
+    color: #ffffff !important;
     margin-bottom: 0.75rem;
+    text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
 }
 
 .tip-content p {
-    color: #555;
+    color: rgba(255, 255, 255, 0.8) !important;
     margin-bottom: 1rem;
     line-height: 1.6;
 }
 
 .tip-date {
-    color: #6c757d;
+    color: rgba(255, 255, 255, 0.6) !important;
     font-style: italic;
 }
 
@@ -185,13 +198,15 @@
 }
 
 .modal-content {
-    background-color: white;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     margin: 5% auto;
     padding: 0;
-    border-radius: 10px;
+    border-radius: 15px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 .modal-header {
@@ -204,7 +219,8 @@
 
 .modal-header h3 {
     margin: 0;
-    color: #2c3e50;
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
 }
 
 .close {
