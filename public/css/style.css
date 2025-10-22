@@ -33,17 +33,13 @@ body {
     color: var(--text-primary);
     background: var(--void-black);
     background-image: 
-        radial-gradient(ellipse at top, rgba(255, 0, 128, 0.2) 0%, transparent 60%),
-        radial-gradient(ellipse at bottom left, rgba(0, 212, 255, 0.2) 0%, transparent 60%),
-        radial-gradient(ellipse at bottom right, rgba(0, 255, 136, 0.15) 0%, transparent 60%),
-        radial-gradient(ellipse at center, rgba(121, 40, 202, 0.1) 0%, transparent 80%);
-    background-attachment: fixed;
+        radial-gradient(ellipse at top, rgba(255, 0, 128, 0.1) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom left, rgba(0, 212, 255, 0.1) 0%, transparent 60%);
     min-height: 100vh;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
-    position: relative;
 }
 
 .container {
@@ -55,15 +51,14 @@ body {
 /* Navigation */
 .navbar {
     background: var(--card-bg);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     padding: 0.5rem 0;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     border-bottom: 1px solid var(--glass-border);
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-container {
@@ -81,8 +76,7 @@ body {
     font-size: 1.6rem;
     font-weight: 900;
     font-family: 'Space Grotesk', sans-serif;
-    background: var(--gradient-quantum);
-    background-size: 400% 400%;
+    background: linear-gradient(135deg, #ff0080, #00d4ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -90,9 +84,6 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    filter: drop-shadow(0 0 15px rgba(255, 0, 128, 0.8));
-    animation: logoGlow 2s ease-in-out infinite alternate, quantumText 3s ease-in-out infinite;
-    text-shadow: 0 0 30px rgba(255, 0, 128, 0.5);
 }
 
 @keyframes logoGlow {
@@ -117,21 +108,14 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--gradient-quantum);
-    background-size: 400% 400%;
+    background: linear-gradient(135deg, #ff0080, #00d4ff);
     border: none;
     padding: 0.6rem;
     border-radius: 12px;
     cursor: pointer;
     color: white;
     font-size: 1rem;
-    box-shadow: 0 0 20px rgba(255, 0, 128, 0.4), 0 0 40px rgba(0, 212, 255, 0.2);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    animation: quantumButton 3s ease-in-out infinite;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    position: relative;
-    overflow: hidden;
+    transition: transform 0.2s ease;
 }
 
 .mobile-menu-toggle:hover {
@@ -169,8 +153,7 @@ body {
     font-weight: 700;
     padding: 0.6rem 1.2rem;
     border-radius: 12px;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
+    transition: all 0.2s ease;
     font-size: 0.85rem;
     letter-spacing: -0.01em;
     border: 1px solid transparent;
@@ -179,10 +162,7 @@ body {
 
 .nav-menu a:hover {
     color: white;
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-neon);
+    background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 0, 128, 0.3);
 }
 
@@ -247,29 +227,17 @@ body {
 }
 
 .btn-primary {
-    background: var(--gradient-quantum);
-    background-size: 400% 400%;
+    background: linear-gradient(135deg, #ff0080, #00d4ff);
     color: white;
-    border: 3px solid transparent;
-    background-clip: padding-box;
-    box-shadow: 
-        var(--shadow-quantum), 
-        inset 0 0 20px rgba(255, 255, 255, 0.1),
-        0 0 0 3px rgba(255, 0, 128, 0.3);
-    animation: quantumButton 3s ease-in-out infinite;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(255, 0, 128, 0.3);
     position: relative;
     overflow: hidden;
 }
 
 .btn-primary:hover {
-    transform: translateY(-8px) scale(1.08) rotateX(10deg);
-    box-shadow: 
-        0 0 100px rgba(255, 0, 128, 0.8),
-        0 0 150px rgba(0, 212, 255, 0.6),
-        0 30px 60px rgba(0, 0, 0, 0.5),
-        inset 0 0 30px rgba(255, 255, 255, 0.2),
-        0 0 0 5px rgba(255, 0, 128, 0.5);
-    animation-play-state: paused;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 0, 128, 0.5);
 }
 
 .btn-primary::before {
@@ -316,19 +284,16 @@ body {
 }
 
 .btn-secondary {
-    background: var(--card-bg);
+    background: rgba(255, 255, 255, 0.1);
     color: white;
     border: 2px solid rgba(0, 212, 255, 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: var(--shadow-cyber);
+    backdrop-filter: blur(10px);
 }
 
 .btn-secondary:hover {
-    background: rgba(0, 212, 255, 0.1);
+    background: rgba(0, 212, 255, 0.2);
     border-color: rgba(0, 212, 255, 0.6);
-    transform: translateY(-6px) scale(1.05);
-    box-shadow: 0 0 40px rgba(0, 212, 255, 0.4), 0 20px 40px rgba(0, 212, 255, 0.2);
+    transform: translateY(-2px);
 }
 
 .btn-secondary::before {
@@ -750,12 +715,11 @@ body {
     max-width: 1400px;
     margin: 3rem auto;
     padding: 3rem;
-    background: var(--glass-bg);
-    backdrop-filter: blur(32px);
-    -webkit-backdrop-filter: blur(32px);
-    border-radius: 32px;
-    border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-xl);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 /* Dashboard Safety Tips */
@@ -1012,20 +976,18 @@ body {
 }
 
 .tip-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: var(--shadow-quantum);
-    border: 2px solid var(--glass-border);
-    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .tip-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 0 40px rgba(255, 0, 128, 0.3);
-    border-color: rgba(255, 0, 128, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(255, 0, 128, 0.2);
 }
 
 .tip-card h3 {
