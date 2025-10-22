@@ -1,0 +1,33 @@
+version: "1"
+services:
+- type: web
+  name: project-cifs
+  runtime: node
+  repo: https://github.com/PriyanshuKSharma/project-cifs
+  plan: free
+  envVars:
+  - key: UPLOAD_PATH
+    value: ./uploads
+  - key: MAX_FILE_SIZE
+    value: "5242880"
+  - key: NODE_ENV
+    value: production
+  - key: SESSION_SECRET
+    value: cybercrime_app_secret_key_2024_render_deployment
+  - key: DATABASE_URL
+    fromDatabase:
+      name: project-cifs-db
+      property: connectionString
+  region: oregon
+  buildCommand: |
+    npm install
+    mkdir -p uploads
+  startCommand: npm start
+  autoDeployTrigger: commit
+
+databases:
+- name: project-cifs-db
+  databaseName: cybercrime_db
+  user: cybercrime_user
+  plan: free
+  region: oregon
