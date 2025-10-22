@@ -4,23 +4,47 @@ class Report {
   static async create(reportData) {
     const { user_id, incident_type, description, evidence_file, incident_date } = reportData;
     
-    return new Promise((resolve, reject) => {
-      const query = 'INSERT INTO reports (user_id, incident_type, description, evidence_file, incident_date) VALUES (?, ?, ?, ?, ?)';
-      db.query(query, [user_id, incident_type, description, evidence_file, incident_date], (err, result) => {
-        if (err) reject(err);
-        else resolve(result);
-      });
-    });
+    try {
+      if (process.env.DATABASE_URL) {
+        // PostgreSQL
+        const query = 'INSERT INTO reports (user_id, incident_type, description, evidence_file, incident_date) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+        const result = await db.query(query, [user_id, incident_type, description, evidence_file, incident_date]);
+        return result.rows[0];
+      } else {
+        // MySQL
+        return new Promise((resolve, reject) => {
+          const query = 'INSERT INTO reports (user_id, incident_type, description, evidence_file, incident_date) VALUES (?, ?, ?, ?, ?)';
+          db.query(query, [user_id, incident_type, description, evidence_file, incident_date], (err, result) => {
+            if (err) reject(err);
+            else resolve(result);
+          });
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   static async findByUserId(userId) {
-    return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM reports WHERE user_id = ? ORDER BY created_at DESC';
-      db.query(query, [userId], (err, results) => {
-        if (err) reject(err);
-        else resolve(results);
-      });
-    });
+    try {
+      if (process.env.DATABASE_URL) {
+        // PostgreSQL
+        const query = 'SELECT * FROM reports WHERE user_id = $1 ORDER BY created_at DESC';
+        const result = await db.query(query, [userId]);
+        return result.rows;
+      } else {
+        // MySQL
+        return new Promise((resolve, reject) => {
+          const query = 'SELECT * FROM reports WHERE user_id = ? ORDER BY created_at DESC';
+          db.query(query, [userId], (err, results) => {
+            if (err) reject(err);
+            else resolve(results);
+          });
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   static async findById(id) {
