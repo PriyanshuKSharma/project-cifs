@@ -45,10 +45,13 @@ app.use((req, res, next) => {
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const adminRoutes = require('./routes/admin');
+const apiRoutes = require('./routes/api');
 
 app.use('/', authRoutes);
 app.use('/', userRoutes);
 app.use('/admin', adminRoutes);
+// API for frontend (JSON)
+app.use('/api', apiRoutes);
 
 // Error handling
 process.on('uncaughtException', (error) => {
