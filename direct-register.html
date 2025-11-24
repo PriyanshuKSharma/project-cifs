@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Direct Registration Test</title>
+    <style>
+        body { font-family: Arial; max-width: 500px; margin: 50px auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { width: 100%; padding: 12px; background: #4f46e5; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        button:hover { background: #4338ca; }
+        .message { padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d1fae5; color: #065f46; }
+        .error { background: #fee2e2; color: #991b1b; }
+    </style>
+</head>
+<body>
+    <h2>Direct Registration Test</h2>
+    <div id="message"></div>
+    
+    <form id="regForm">
+        <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Email *</label>
+            <input type="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="tel" id="phone">
+        </div>
+        
+        <div class="form-group">
+            <label>Password * (min 6 chars)</label>
+            <input type="password" id="password" required minlength="6">
+        </div>
+        
+        <div class="form-group">
+            <label>Confirm Password *</label>
+            <input type="password" id="confirmPassword" required minlength="6">
+        </div>
+        
+        <button type="submit">Create Account</button>
+    </form>
+
+    <script>
+        document.getElementById('regForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match!', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, phone, password, confirmPassword })
+                });
+                
+                if (response.redirected) {
+                    showMessage('Registration successful! Redirecting to login...', 'success');
+                    setTimeout(() => window.location.href = '/login', 2000);
+                } else {
+                    showMessage('Registration failed. Please try again.', 'error');
+                }
+            } catch (error) {
+                showMessage('Error: ' + error.message, 'error');
+            }
+        });
+        
+        function showMessage(text, type) {
+            const msg = document.getElementById('message');
+            msg.textContent = text;
+            msg.className = 'message ' + type;
+        }
+    </script>
+</body>
+</html>
