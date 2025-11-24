@@ -20,7 +20,7 @@ services:
       property: connectionString
   region: oregon
   buildCommand: |
-    npm install --no-frozen-lockfile
+    npm install
     npm run build
     mkdir -p uploads
   startCommand: npm start
