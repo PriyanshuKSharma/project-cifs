@@ -1,0 +1,177 @@
+---
+layout: ../../layouts/Layout.astro
+---
+
+<Layout title="Manage Tips">
+  <!-- Match the public tips hero so admin sees same branding -->
+  <section class="w-full bg-gradient-to-r from-amber-400 via-pink-500 to-indigo-600 text-white py-12">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-4">
+        <div class="p-3 rounded-lg bg-white/10 ring-1 ring-white/20">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2l7 3v5c0 5-3.58 9.74-7 11-3.42-1.26-7-6-7-11V5l7-3z" />
+          </svg>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold">Manage Prevention Tips</h2>
+          <p class="opacity-90 text-sm">Create, edit and remove prevention tips that appear on the public site.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto py-8 px-6">
+    <div class="max-w-3xl mx-auto mb-6">
+      <input id="admin-tips-search" type="search" placeholder="Search tips (title or content)" class="w-full p-3 rounded-lg bg-white/5 ring-1 ring-white/10 placeholder-gray-300 text-white" />
+    </div>
+
+    <div id="tips-root" class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">Loading tips...</div>
+
+    <form id="add-tip-form" action="/admin/tips" method="POST" class="mt-6">
+      <div class="card p-4">
+        <h3 class="font-semibold mb-2">Add New Tip</h3>
+        <div class="mb-2">
+          <input type="text" name="title" placeholder="Title" required class="w-full border p-2 rounded" />
+        </div>
+        <div class="mb-2">
+          <textarea name="content" rows="4" placeholder="Tip content" required class="w-full border p-2 rounded"></textarea>
+        </div>
+        <div>
+          <button class="px-4 py-2 bg-indigo-600 text-white rounded">Add Tip</button>
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <script>
+    let allTips = [];
+    const root = document.getElementById('tips-root');
+    const search = document.getElementById('admin-tips-search');
+
+    function escapeHtml(s) { return (s||'').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+    function highlight(text, q) {
+      if (!q) return text;
+      try {
+        const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        return text.replace(re, m => `<mark class="bg-yellow-300 text-black px-0">${m}</mark>`);
+      } catch (e) { return text; }
+    }
+
+    function renderTips(list, q) {
+      if (!list.length) { root.innerHTML = '<p class="col-span-full text-center text-gray-600">No tips yet.</p>'; return; }
+      root.innerHTML = '';
+      list.forEach((t, idx) => {
+        const card = document.createElement('article');
+        card.className = 'rounded-xl p-4 bg-white/5 ring-1 ring-white/5';
+        const titleRaw = t.title || '';
+        const contentRaw = t.content || '';
+        const title = escapeHtml(titleRaw);
+        const content = escapeHtml(contentRaw);
+        const max = 220;
+        const isLong = contentRaw.length > max;
+        const preview = isLong ? escapeHtml(contentRaw.slice(0, max)) + '...' : content;
+        card.innerHTML = `
+          <div class="flex items-start gap-3">
+            <div class="flex-1">
+              <h4 class="font-semibold mb-1">${q ? highlight(escapeHtml(titleRaw), q) : title}</h4>
+              <div class="text-sm text-gray-200">${q ? highlight(escapeHtml(contentRaw), q) : (isLong ? preview : content)}</div>
+            </div>
+            <div class="flex-shrink-0 flex flex-col gap-2">
+              <button data-id="${t.id}" class="admin-delete px-3 py-1 bg-red-600 text-white rounded">Delete</button>
+            </div>
+          </div>
+        `;
+        // attach read-more if needed
+        if (isLong) {
+          const readBtn = document.createElement('button');
+          readBtn.className = 'mt-3 read-more inline-block px-3 py-1 bg-indigo-600 text-white rounded';
+          readBtn.dataset.title = titleRaw;
+          readBtn.dataset.content = contentRaw;
+          readBtn.innerText = 'Read more';
+          card.querySelector('.flex-1').appendChild(readBtn);
+        }
+        root.appendChild(card);
+      });
+    }
+
+    async function loadTips() {
+      try {
+        const res = await fetch('/api/tips');
+        if (!res.ok) { root.innerText = 'Failed to load tips'; return; }
+        const json = await res.json();
+        allTips = json.tips || [];
+        renderTips(allTips);
+      } catch (err) {
+        root.innerText = 'Error loading tips';
+      }
+    }
+
+    search.addEventListener('input', (e) => {
+      const q = (e.target.value || '').toLowerCase().trim();
+      if (!q) return renderTips(allTips);
+      const filtered = allTips.filter(t => ((t.title||'') + ' ' + (t.content||'')).toLowerCase().includes(q));
+      renderTips(filtered, q);
+    });
+
+    // read-more modal (reuse same pattern as public)
+    const modal = document.createElement('div');
+    modal.id = 'tip-modal-admin';
+    modal.className = 'fixed inset-0 z-50 hidden items-center justify-center p-6';
+    modal.innerHTML = `
+      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="relative max-w-3xl w-full bg-white/5 ring-1 ring-white/10 rounded-lg p-6">
+        <button id="tip-modal-admin-close" class="absolute top-3 right-3 text-white">✕</button>
+        <h3 id="tip-modal-admin-title" class="text-xl font-semibold text-white mb-3"></h3>
+        <div id="tip-modal-admin-body" class="text-gray-200"></div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    document.body.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.read-more');
+      if (btn) {
+        const title = btn.dataset.title || '';
+        const content = btn.dataset.content || '';
+        document.getElementById('tip-modal-admin-title').innerText = title;
+        document.getElementById('tip-modal-admin-body').innerHTML = content.replace(/\n/g, '<br/>');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+
+      const close = e.target.closest('#tip-modal-admin-close');
+      if (close) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+
+      // admin delete via AJAX
+      const del = e.target.closest('.admin-delete');
+      if (del) {
+        const id = del.dataset.id;
+        if (!confirm('Delete tip?')) return;
+        try {
+          const resp = await fetch('/admin/tips/' + id + '/delete', { method: 'POST', credentials: 'same-origin' });
+          if (!resp.ok) { alert('Delete failed'); return; }
+          // remove card
+          del.closest('article').remove();
+        } catch (err) { alert('Network error'); }
+      }
+    });
+
+    // AJAX add tip (enhanced UX)
+    const addForm = document.getElementById('add-tip-form');
+    addForm.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const fd = new FormData(addForm);
+      try {
+        const res = await fetch(addForm.action || '/admin/tips', { method: 'POST', body: fd, credentials: 'same-origin' });
+        if (!res.ok) { alert('Failed to create tip'); return; }
+        // reload tips list
+        await loadTips();
+        addForm.reset();
+      } catch (err) { alert('Network error'); }
+    });
+
+    loadTips();
+  </script>
+</Layout>

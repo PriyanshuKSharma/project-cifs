@@ -1,0 +1,151 @@
+---
+layout: ../layouts/Layout.astro
+---
+
+<Layout title="Prevention Tips">
+  <!-- Distinct hero for Prevention Tips -->
+  <section class="w-full bg-gradient-to-r from-amber-400 via-pink-500 to-indigo-600 text-white py-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-6">
+        <div class="p-4 rounded-lg bg-white/10 ring-1 ring-white/20">
+          <!-- simple shield icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2l7 3v5c0 5-3.58 9.74-7 11-3.42-1.26-7-6-7-11V5l7-3z" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-4xl font-extrabold">Prevention Tips</h1>
+          <p class="mt-2 text-lg max-w-2xl opacity-90">Practical, bite-sized tips to help citizens stay safe online. These are curated and prioritized for quick reading.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </section>
+
+  <section class="max-w-6xl mx-auto py-12 px-6">
+    <div class="max-w-3xl mx-auto mb-6">
+      <input id="tips-search" type="search" placeholder="Search tips — try 'password', 'phishing', 'update'..." 
+             class="w-full p-3 rounded-lg bg-white/5 ring-1 ring-white/10 placeholder-gray-300 text-white" />
+    </div>
+
+    <div id="tips-root" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">Loading tips...</div>
+  </section>
+
+  <script>
+    let allTips = [];
+    const root = document.getElementById('tips-root');
+    const search = document.getElementById('tips-search');
+
+    function escapeHtml(s) {
+      return (s||'').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    function highlight(text, q) {
+      if (!q) return text;
+      try {
+        const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        return text.replace(re, m => `<mark class="bg-yellow-300 text-black px-0">${m}</mark>`);
+      } catch (e) {
+        return text;
+      }
+    }
+
+    function renderTips(list, q) {
+      if (!list.length) { root.innerHTML = '<p class="col-span-full text-center text-gray-600">No tips available yet.</p>'; return; }
+      root.innerHTML = '';
+      list.forEach((t, idx) => {
+        const card = document.createElement('article');
+        card.className = 'group rounded-2xl p-5 bg-white/5 ring-1 ring-white/5 hover:scale-[1.02] transform transition shadow-lg';
+        const accent = ['from-amber-400','from-cyan-400','from-pink-500'][idx % 3];
+        const titleRaw = t.title || '';
+        const contentRaw = t.content || '';
+        const title = escapeHtml(titleRaw);
+        const content = escapeHtml(contentRaw);
+
+        // truncation
+        const max = 220;
+        const isLong = contentRaw.length > max;
+        const preview = isLong ? escapeHtml(contentRaw.slice(0, max)) + '...' : content;
+
+        const displayed = q ? highlight(escapeHtml((titleRaw + ' ' + contentRaw)), q) : null;
+
+        // when q present, prefer highlighted combined text
+        const contentHtml = q ? displayed.split(' ').slice(1).join(' ') : (isLong ? preview : content);
+
+        card.innerHTML = `
+          <div class="flex items-start gap-4">
+            <div class="flex-shrink-0 mt-1">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br ${accent} to-indigo-600 flex items-center justify-center text-white">
+                <svg xmlns=\"http://www.w3.org/2000/svg\" class=\"h-6 w-6\" fill=\"none\" viewBox=\"0 0 24 24\" stroke=\"currentColor\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"1.5\" d=\"M12 11c0-3.866 3.134-7 7-7\"/></svg>
+              </div>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-semibold group-hover:text-white">${q ? highlight(escapeHtml(titleRaw), q) : title}</h3>
+              <p class="mt-2 text-sm text-gray-200 leading-relaxed" data-full='${escapeHtml(contentRaw)}'>${q ? highlight(escapeHtml(contentRaw), q) : (isLong ? preview : content)}</p>
+              ${isLong ? `<div class="mt-3"><button class="read-more inline-block px-3 py-1 bg-indigo-600 text-white rounded" data-title='${escapeHtml(titleRaw)}' data-content='${escapeHtml(contentRaw)}'>Read more</button></div>` : ''}
+            </div>
+          </div>
+        `;
+        root.appendChild(card);
+      });
+    }
+
+    async function loadTips() {
+      try {
+        const res = await fetch('/api/tips');
+        if (!res.ok) { root.innerText = 'Failed to load tips'; return; }
+        const json = await res.json();
+        allTips = json.tips || [];
+        renderTips(allTips);
+      } catch (err) {
+        root.innerText = 'Error loading tips';
+      }
+    }
+
+    search.addEventListener('input', (e) => {
+      const q = (e.target.value || '').toLowerCase().trim();
+      if (!q) return renderTips(allTips);
+      const filtered = allTips.filter(t => ((t.title||'') + ' ' + (t.content||'')).toLowerCase().includes(q));
+      renderTips(filtered, q);
+    });
+
+    // read-more modal
+    const modal = document.createElement('div');
+    modal.id = 'tip-modal';
+    modal.className = 'fixed inset-0 z-50 hidden items-center justify-center p-6';
+    modal.innerHTML = `
+      <div class="absolute inset-0 bg-black/60"></div>
+      <div class="relative max-w-3xl w-full bg-white/5 ring-1 ring-white/10 rounded-lg p-6">
+        <button id="tip-modal-close" class="absolute top-3 right-3 text-white">✕</button>
+        <h3 id="tip-modal-title" class="text-xl font-semibold text-white mb-3"></h3>
+        <div id="tip-modal-body" class="text-gray-200"></div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    document.body.addEventListener('click', (e) => {
+      const btn = e.target.closest('.read-more');
+      if (btn) {
+        const title = btn.dataset.title || '';
+        const content = btn.dataset.content || '';
+        document.getElementById('tip-modal-title').innerText = title;
+        document.getElementById('tip-modal-body').innerHTML = content.replace(/\n/g, '<br/>');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      }
+      const close = e.target.closest('#tip-modal-close');
+      if (close) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+      // close when clicking background overlay
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    });
+
+    loadTips();
+  </script>
+</Layout>

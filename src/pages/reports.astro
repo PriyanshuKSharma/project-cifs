@@ -1,0 +1,41 @@
+---
+layout: ../layouts/Layout.astro
+---
+
+<Layout title="My Reports">
+  <section class="max-w-4xl mx-auto py-12">
+    <h2 class="text-3xl font-bold mb-6">My Reports</h2>
+    <div class="card">
+      <div id="reports-root">Loading reports...</div>
+    </div>
+  </section>
+
+  <script>
+    async function loadReports() {
+      try {
+        const res = await fetch('/api/reports');
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        const root = document.getElementById('reports-root');
+        if (!data.ok) { root.innerText = 'Failed to load reports'; return; }
+        if (!data.reports.length) { root.innerText = 'No reports yet'; return; }
+        const table = document.createElement('table');
+        table.className = 'w-full border-collapse';
+        table.innerHTML = `
+          <thead><tr><th>ID</th><th>Type</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody></tbody>`;
+        const tbody = table.querySelector('tbody');
+        data.reports.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${r.id}</td><td>${r.incident_type}</td><td>${r.incident_date||''}</td><td>${r.status}</td><td><a href='/report/${r.id}'>View</a></td>`;
+          tbody.appendChild(tr);
+        });
+        root.innerHTML = '';
+        root.appendChild(table);
+      } catch (err) {
+        document.getElementById('reports-root').innerText = 'Error loading reports';
+      }
+    }
+    loadReports();
+  </script>
+</Layout>

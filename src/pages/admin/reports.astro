@@ -1,0 +1,108 @@
+---
+layout: ../../layouts/Layout.astro
+---
+
+<Layout title="Manage Reports">
+  <section class="max-w-6xl mx-auto py-12">
+    <h2 class="text-3xl font-bold mb-6">All Reports</h2>
+    <div class="card">
+      <div id="admin-reports-root">Loading...</div>
+    </div>
+  </section>
+
+  <script>
+    async function loadAllReports() {
+      const root = document.getElementById('admin-reports-root');
+      try {
+        const res = await fetch('/api/admin/reports', { credentials: 'same-origin' });
+        if (!res.ok) {
+          root.innerText = 'Failed to load reports: ' + res.status;
+          return;
+        }
+        const data = await res.json();
+        if (!data.ok) {
+          root.innerText = 'Error: ' + (data.error || 'unknown');
+          return;
+        }
+        const reports = data.reports || [];
+        if (!reports.length) {
+          root.innerHTML = '<p>No reports yet.</p>';
+          return;
+        }
+        const table = document.createElement('table');
+        table.className = 'w-full border-collapse';
+        table.innerHTML = `
+          <thead>
+            <tr class="text-left border-b">
+              <th class="p-2">ID</th>
+              <th class="p-2">Title</th>
+              <th class="p-2">User</th>
+              <th class="p-2">Status</th>
+              <th class="p-2">Created</th>
+              <th class="p-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        `;
+        const tbody = table.querySelector('tbody');
+        reports.forEach(r => {
+          const tr = document.createElement('tr');
+          tr.className = 'border-b';
+          tr.innerHTML = `
+            <td class="p-2">${r.id}</td>
+            <td class="p-2">${r.title || r.category || '—'}</td>
+            <td class="p-2">${r.user_name || r.user_email || r.user_id}</td>
+            <td class="p-2"><span data-id="status-${r.id}">${r.status || 'open'}</span></td>
+            <td class="p-2">${new Date(r.created_at).toLocaleString()}</td>
+            <td class="p-2">
+              <button data-action="view" data-id="${r.id}" class="mr-2 px-3 py-1 bg-indigo-600 text-white rounded">View</button>
+              <select data-action="status" data-id="${r.id}" class="px-2 py-1 border rounded">
+                <option value="open" ${r.status==='open'?'selected':''}>open</option>
+                <option value="investigating" ${r.status==='investigating'?'selected':''}>investigating</option>
+                <option value="closed" ${r.status==='closed'?'selected':''}>closed</option>
+              </select>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+        root.innerHTML = '';
+        root.appendChild(table);
+
+        root.addEventListener('click', (e) => {
+          const btn = e.target.closest('button[data-action="view"]');
+          if (!btn) return;
+          const id = btn.dataset.id;
+          // navigate to the admin report detail (server-rendered or new Astro page)
+          location.href = '/admin/report/' + id;
+        });
+
+        root.addEventListener('change', async (e) => {
+          const sel = e.target.closest('select[data-action="status"]');
+          if (!sel) return;
+          const id = sel.dataset.id;
+          const newStatus = sel.value;
+          try {
+            const r = await fetch('/api/admin/report/' + id + '/status', {
+              method: 'PATCH',
+              credentials: 'same-origin',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status: newStatus })
+            });
+            const json = await r.json();
+            if (!json.ok) {
+              alert('Update failed: ' + (json.error || r.status));
+            } else {
+              const statusSpan = document.querySelector('[data-id="status-' + id + '"]');
+              if (statusSpan) statusSpan.innerText = newStatus;
+            }
+          } catch (err) {
+            alert('Network error');
+          }
+        });
+      } catch (err) {
+        root.innerText = 'Error loading reports';
+      }
+    }
+    loadAllReports();
+  </script>
+</Layout>

@@ -1,0 +1,36 @@
+---
+layout: ../../layouts/Layout.astro
+const { id } = Astro.params;
+---
+
+<Layout title={`Report ${id}`}>
+  <section class="max-w-3xl mx-auto py-12">
+    <div class="card">
+      <div id="report-root">Loading...</div>
+    </div>
+  </section>
+
+  <script>
+    async function loadReport() {
+      try {
+        const res = await fetch(`/api/report/${encodeURIComponent("" + Astro.params.id)}`);
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+        const root = document.getElementById('report-root');
+        if (!data.ok) { root.innerText = 'Failed to load report'; return; }
+        const r = data.report;
+        root.innerHTML = `<h2 class="text-2xl font-bold mb-2">Report #${r.id}</h2>
+          <p><strong>Type:</strong> ${r.incident_type}</p>
+          <p><strong>Date:</strong> ${r.incident_date||''}</p>
+          <p><strong>Description:</strong></p>
+          <p>${r.description || ''}</p>
+          <p><strong>Status:</strong> ${r.status}</p>`;
+        if (r.evidence_file) root.innerHTML += `<p><a href='${r.evidence_file}' target='_blank'>Evidence</a></p>`;
+        if (r.admin_response) root.innerHTML += `<h3 class='mt-4'>Admin Response</h3><p>${r.admin_response}</p>`;
+      } catch (err) {
+        document.getElementById('report-root').innerText = 'Error loading report';
+      }
+    }
+    loadReport();
+  </script>
+</Layout>

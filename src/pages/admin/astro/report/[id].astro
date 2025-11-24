@@ -1,0 +1,103 @@
+---
+import { Astro } from 'astro';
+layout: ../../../layouts/Layout.astro
+---
+
+<Layout title="Report Detail">
+  <section class="max-w-4xl mx-auto py-12">
+    <h2 class="text-2xl font-bold mb-4">Report Detail</h2>
+    <div class="card">
+      <div id="report-root">Loading report...</div>
+    </div>
+  </section>
+
+  <script>
+    async function load() {
+      const root = document.getElementById('report-root');
+      // extract id from path
+      const parts = location.pathname.split('/');
+      const id = parts[parts.length - 1];
+      try {
+        const res = await fetch('/api/admin/report/' + id, { credentials: 'same-origin' });
+        if (!res.ok) {
+          root.innerText = 'Failed to load: ' + res.status;
+          return;
+        }
+        const json = await res.json();
+        if (!json.ok) {
+          root.innerText = 'Error: ' + (json.error || 'unknown');
+          return;
+        }
+        const r = json.report;
+        if (!r) {
+          root.innerText = 'Report not found';
+          return;
+        }
+        const div = document.createElement('div');
+        div.innerHTML = `
+          <h3 class="text-xl font-semibold mb-2">#${r.id} — ${r.incident_type || 'Report'}</h3>
+          <p class="text-sm text-gray-600 mb-4">Reported by: ${r.user_name || r.user_email}</p>
+          <div class="mb-4">
+            <strong>Status:</strong> <span id="status-val">${r.status}</span>
+          </div>
+          <div class="mb-4">
+            <strong>Submitted:</strong> ${new Date(r.created_at).toLocaleString()}
+          </div>
+          <div class="mb-4">
+            <strong>Description</strong>
+            <div class="mt-2 p-3 bg-gray-50 rounded">${(r.description || '').replace(/\n/g, '<br/>')}</div>
+          </div>
+        `;
+        // admin response form
+        const form = document.createElement('div');
+        form.innerHTML = `
+          <h4 class="text-lg font-semibold mb-2">Update Status</h4>
+          <div class="mb-2">
+            <select id="new-status" class="border p-2 rounded">
+              <option value="pending">pending</option>
+              <option value="investigating">investigating</option>
+              <option value="closed">closed</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <textarea id="admin_response" rows="5" class="w-full border p-2 rounded" placeholder="Response to reporter...">${r.admin_response || ''}</textarea>
+          </div>
+          <div>
+            <button id="save-btn" class="px-4 py-2 bg-indigo-600 text-white rounded">Save</button>
+            <a href="/admin/astro/reports" class="ml-2 px-4 py-2 bg-gray-200 rounded">Back</a>
+          </div>
+        `;
+
+        root.innerHTML = '';
+        root.appendChild(div);
+        root.appendChild(form);
+
+        document.getElementById('save-btn').addEventListener('click', async () => {
+          const status = document.getElementById('new-status').value;
+          const admin_response = document.getElementById('admin_response').value;
+          try {
+            const r2 = await fetch('/api/admin/report/' + id + '/status', {
+              method: 'PATCH',
+              credentials: 'same-origin',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ status, admin_response })
+            });
+            const j = await r2.json();
+            if (!j.ok) {
+              alert('Update failed: ' + (j.error || r2.status));
+              return;
+            }
+            document.getElementById('status-val').innerText = status;
+            alert('Saved');
+          } catch (err) {
+            alert('Network error');
+          }
+        });
+
+      } catch (err) {
+        root.innerText = 'Error loading report';
+      }
+    }
+    load();
+  </script>
+</Layout>

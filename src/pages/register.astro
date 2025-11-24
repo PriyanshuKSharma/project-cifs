@@ -1,0 +1,32 @@
+---
+layout: ../layouts/Layout.astro
+---
+
+<Layout title="Register">
+  <section class="max-w-lg mx-auto py-12">
+    <div class="card">
+      <h2 class="text-3xl font-bold mb-6">Register</h2>
+      <form action="/register" method="post" class="space-y-4">
+      <div>
+        <label for="name" class="block">Name</label>
+        <input id="name" name="name" type="text" required class="input" />
+      </div>
+      <div>
+        <label for="email" class="block">Email</label>
+        <input id="email" name="email" type="email" required class="input" />
+      </div>
+      <div>
+        <label for="phone" class="block">Phone</label>
+        <input id="phone" name="phone" type="text" class="input" />
+      </div>
+      <div>
+        <label for="password" class="block">Password</label>
+        <input id="password" name="password" type="password" required class="input" />
+      </div>
+      <div>
+        <button type="submit" class="btn btn-primary">Register</button>
+      </div>
+      </form>
+    </div>
+  </section>
+</Layout>
