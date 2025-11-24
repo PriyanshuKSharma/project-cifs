@@ -16,21 +16,25 @@ const requireAdmin = (req, res, next) => {
 router.get('/dashboard', requireAdmin, async (req, res) => {
   try {
     const stats = await Report.getStats();
-    const recentReports = await Report.findAll();
-    res.render('admin/dashboard', { 
-      stats, 
-      recentReports: recentReports.slice(0, 10) 
+    const recentReports = await Report.findRecent(5);
+    
+    res.render('admin/dashboard', {
+      stats,
+      recentReports
     });
   } catch (error) {
     req.flash('error', 'Error loading dashboard');
-    res.render('admin/dashboard', { stats: {}, recentReports: [] });
+    res.render('admin/dashboard', {
+      stats: { total: 0, pending: 0, review: 0, resolved: 0, rejected: 0 },
+      recentReports: []
+    });
   }
 });
 
 // All reports
 router.get('/reports', requireAdmin, async (req, res) => {
   try {
-    const reports = await Report.findAll();
+    const reports = await Report.findAllWithUsers();
     res.render('admin/reports', { reports });
   } catch (error) {
     req.flash('error', 'Error loading reports');
@@ -41,7 +45,7 @@ router.get('/reports', requireAdmin, async (req, res) => {
 // View specific report
 router.get('/report/:id', requireAdmin, async (req, res) => {
   try {
-    const report = await Report.findById(req.params.id);
+    const report = await Report.findByIdWithUser(req.params.id);
     
     if (!report) {
       req.flash('error', 'Report not found');
