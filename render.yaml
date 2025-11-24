@@ -20,7 +20,8 @@ services:
       property: connectionString
   region: oregon
   buildCommand: |
-    npm install
+    npm install --no-frozen-lockfile
+    npm run build
     mkdir -p uploads
   startCommand: npm start
   autoDeployTrigger: commit
