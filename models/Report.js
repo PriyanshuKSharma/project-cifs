@@ -113,6 +113,74 @@ class Report {
     }
   }
 
+  static async count() {
+    try {
+      if (process.env.DATABASE_URL) {
+        const query = 'SELECT COUNT(*) as count FROM reports';
+        const result = await db.query(query);
+        return result.rows[0].count;
+      } else {
+        return new Promise((resolve, reject) => {
+          const query = 'SELECT COUNT(*) as count FROM reports';
+          db.query(query, (err, results) => {
+            if (err) reject(err);
+            else resolve(results[0].count);
+          });
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async countByStatus(status) {
+    try {
+      if (process.env.DATABASE_URL) {
+        const query = 'SELECT COUNT(*) as count FROM reports WHERE status = $1';
+        const result = await db.query(query, [status]);
+        return result.rows[0].count;
+      } else {
+        return new Promise((resolve, reject) => {
+          const query = 'SELECT COUNT(*) as count FROM reports WHERE status = ?';
+          db.query(query, [status], (err, results) => {
+            if (err) reject(err);
+            else resolve(results[0].count);
+          });
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findRecent(limit = 5) {
+    try {
+      if (process.env.DATABASE_URL) {
+        const query = 'SELECT r.*, u.name as user_name FROM reports r JOIN users u ON r.user_id = u.id ORDER BY r.created_at DESC LIMIT $1';
+        const result = await db.query(query, [limit]);
+        return result.rows;
+      } else {
+        return new Promise((resolve, reject) => {
+          const query = 'SELECT r.*, u.name as user_name FROM reports r JOIN users u ON r.user_id = u.id ORDER BY r.created_at DESC LIMIT ?';
+          db.query(query, [limit], (err, results) => {
+            if (err) reject(err);
+            else resolve(results);
+          });
+        });
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findAllWithUsers() {
+    return this.findAll();
+  }
+
+  static async findByIdWithUser(id) {
+    return this.findById(id);
+  }
+
   static async getStats() {
     try {
       if (process.env.DATABASE_URL) {
