@@ -4,64 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= typeof title !== 'undefined' ? title : 'Cybercrime Prevention Portal' %></title>
+    <!-- Use built Tailwind CSS (generated into public/css/tailwind.css) -->
+    <link rel="stylesheet" href="/css/tailwind.css">
+    <!-- Legacy small overrides / theme styles -->
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: rgb(79 70 229);
+            --color-secondary: rgb(234 88 12);
+            --color-info: rgb(37 99 235);
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
                 <a href="/">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M16 2L26 8V16C26 22.627 21.627 27 15 27C8.373 27 4 22.627 4 16V8L16 2Z" fill="url(#gradient)" stroke="white" stroke-width="2"/>
-                        <path d="M12 16L15 19L20 13" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <defs>
-                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#06b6d4"/>
-                                <stop offset="50%" style="stop-color:#3b82f6"/>
-                                <stop offset="100%" style="stop-color:#8b5cf6"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
-                    CyberGuard Pro
+                    <i class="fas fa-shield-alt"></i>
+                    <span>CyberGuard</span>
                 </a>
             </div>
+            
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
                 <i class="fas fa-bars"></i>
             </button>
+            
             <ul class="nav-menu" id="navMenu">
-                <li><a href="/">Home</a></li>
-                <li><a href="/tips">Prevention Tips</a></li>
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/tips"><i class="fas fa-lightbulb"></i> Prevention Tips</a></li>
                 <% if (user) { %>
                     <% if (user.role === 'admin') { %>
-                        <li><a href="/admin/dashboard">Admin Dashboard</a></li>
-                        <li><a href="/admin/reports">Manage Reports</a></li>
+                        <li><a href="/admin/reports"><i class="fas fa-folder-open"></i> Reports</a></li>
+                        <li><a href="/admin/tips"><i class="fas fa-cog"></i> Manage Tips</a></li>
                     <% } else { %>
-                        <li><a href="/dashboard">Dashboard</a></li>
-                        <li><a href="/report/new">Report Crime</a></li>
-                        <li><a href="/reports">My Reports</a></li>
+                        <li><a href="/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                        <li><a href="/reports"><i class="fas fa-folder-open"></i> My Reports</a></li>
+                        <li><a href="/report/new" class="btn btn-primary btn-sm"><i class="fas fa-exclamation-triangle"></i> Report Crime</a></li>
                     <% } %>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                 <% } else { %>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
+                    <li><a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li><a href="/register" class="btn btn-primary btn-sm"><i class="fas fa-user-plus"></i> Register</a></li>
                 <% } %>
             </ul>
         </div>
     </nav>
 
     <% if (messages.success) { %>
-        <div class="alert alert-success">
-            <% messages.success.forEach(function(message) { %>
-                <p><%= message %></p>
-            <% }); %>
+        <div class="alert alert-success" id="successAlert">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <% messages.success.forEach(function(message) { %>
+                    <p><%= message %></p>
+                <% }); %>
+            </div>
         </div>
     <% } %>
 
     <% if (messages.error) { %>
-        <div class="alert alert-error">
-            <% messages.error.forEach(function(message) { %>
-                <p><%= message %></p>
-            <% }); %>
+        <div class="alert alert-error" id="errorAlert">
+            <i class="fas fa-exclamation-circle"></i>
+            <div>
+                <% messages.error.forEach(function(message) { %>
+                    <p><%= message %></p>
+                <% }); %>
+            </div>
         </div>
     <% } %>
+    
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // Auto-dismiss alerts after 5 seconds
+        setTimeout(() => {
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+            if (successAlert) {
+                successAlert.style.animation = 'slideUp 0.3s ease-out';
+                setTimeout(() => successAlert.remove(), 300);
+            }
+            if (errorAlert) {
+                errorAlert.style.animation = 'slideUp 0.3s ease-out';
+                setTimeout(() => errorAlert.remove(), 300);
+            }
+        }, 5000);
+    </script>

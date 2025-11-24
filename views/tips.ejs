@@ -2,7 +2,7 @@
 
 <main class="main-content">
     <div class="container">
-        <div class="dashboard-header">
+        <div class="form-header">
             <h1><i class="fas fa-shield-alt"></i> Cybersecurity Prevention Tips</h1>
             <p>Stay safe online with these expert recommendations</p>
         </div>
@@ -11,10 +11,13 @@
             <div class="tips-grid">
                 <% tips.forEach(function(tip) { %>
                 <div class="tip-card">
-                    <h3><i class="fas fa-lightbulb"></i> <%= tip.title %></h3>
+                    <h3>
+                        <i class="fas fa-lightbulb"></i>
+                        <%= tip.title %>
+                    </h3>
                     <p><%= tip.content %></p>
-                    <small class="tip-date">
-                        <i class="fas fa-calendar"></i> 
+                    <small style="display: block; margin-top: 1rem; opacity: 0.7;">
+                        <i class="fas fa-calendar"></i>
                         Published: <%= new Date(tip.created_at).toLocaleDateString() %>
                     </small>
                 </div>
@@ -28,186 +31,69 @@
             </div>
         <% } %>
 
-        <div class="additional-resources">
-            <h2>Additional Resources</h2>
-            <div class="resource-grid">
-                <div class="resource-card">
+        <div style="margin-top: 4rem;">
+            <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2rem;">Additional Resources</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
                     <i class="fas fa-phone"></i>
-                    <h4>Emergency Helpline</h4>
+                    <h3>Emergency Helpline</h3>
                     <p>Call 1930 for immediate cybercrime assistance</p>
-                    <span class="resource-highlight">24/7 Available</span>
+                    <span class="status-badge status-resolved" style="margin-top: 1rem; display: inline-block;">24/7 Available</span>
                 </div>
                 
-                <div class="resource-card">
+                <div class="feature-card">
                     <i class="fas fa-envelope"></i>
-                    <h4>Email Support</h4>
+                    <h3>Email Support</h3>
                     <p>Send detailed reports to our cybercrime unit</p>
-                    <span class="resource-highlight">report@cybercrime.gov.in</span>
+                    <span class="status-badge status-review" style="margin-top: 1rem; display: inline-block;">report@cybercrime.gov.in</span>
                 </div>
                 
-                <div class="resource-card">
+                <div class="feature-card">
                     <i class="fas fa-globe"></i>
-                    <h4>Official Portal</h4>
+                    <h3>Official Portal</h3>
                     <p>Visit the national cybercrime reporting portal</p>
-                    <span class="resource-highlight">cybercrime.gov.in</span>
+                    <span class="status-badge status-review" style="margin-top: 1rem; display: inline-block;">cybercrime.gov.in</span>
                 </div>
                 
-                <div class="resource-card">
+                <div class="feature-card">
                     <i class="fas fa-users"></i>
-                    <h4>Community Support</h4>
+                    <h3>Community Support</h3>
                     <p>Join our cybersecurity awareness programs</p>
-                    <span class="resource-highlight">Local Workshops</span>
+                    <span class="status-badge status-pending" style="margin-top: 1rem; display: inline-block;">Local Workshops</span>
                 </div>
             </div>
         </div>
 
-        <div class="safety-checklist">
-            <h2>Quick Safety Checklist</h2>
-            <div class="checklist-container">
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle"></i>
+        <div class="card" style="margin-top: 4rem;">
+            <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2rem;">Quick Safety Checklist</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+                <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark); border: 1px solid var(--border); border-radius: 10px; transition: all 0.3s;">
+                    <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--success);"></i>
                     <span>Use strong, unique passwords for all accounts</span>
                 </div>
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle"></i>
+                <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark); border: 1px solid var(--border); border-radius: 10px; transition: all 0.3s;">
+                    <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--success);"></i>
                     <span>Enable two-factor authentication where possible</span>
                 </div>
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle"></i>
+                <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark); border: 1px solid var(--border); border-radius: 10px; transition: all 0.3s;">
+                    <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--success);"></i>
                     <span>Keep software and operating systems updated</span>
                 </div>
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle"></i>
+                <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark); border: 1px solid var(--border); border-radius: 10px; transition: all 0.3s;">
+                    <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--success);"></i>
                     <span>Be cautious with email attachments and links</span>
                 </div>
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle"></i>
+                <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark); border: 1px solid var(--border); border-radius: 10px; transition: all 0.3s;">
+                    <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--success);"></i>
                     <span>Use secure networks for sensitive transactions</span>
                 </div>
-                <div class="checklist-item">
-                    <i class="fas fa-check-circle"></i>
+                <div style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--dark); border: 1px solid var(--border); border-radius: 10px; transition: all 0.3s;">
+                    <i class="fas fa-check-circle" style="font-size: 1.5rem; color: var(--success);"></i>
                     <span>Regularly backup important data</span>
                 </div>
             </div>
         </div>
     </div>
 </main>
-
-<style>
-.tip-date {
-    color: #6c757d;
-    font-style: italic;
-    margin-top: 1rem;
-    display: block;
-}
-
-.additional-resources {
-    margin: 4rem 0;
-}
-
-.additional-resources h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #ffffff !important;
-    text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
-}
-
-.resource-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
-}
-
-.resource-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.resource-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    border-color: rgba(255, 0, 128, 0.3);
-}
-
-.resource-card i {
-    font-size: 2.5rem;
-    color: #e74c3c;
-    margin-bottom: 1rem;
-}
-
-.resource-card h4 {
-    color: #ffffff !important;
-    margin-bottom: 1rem;
-    text-shadow: 0 0 10px rgba(255, 0, 128, 0.5);
-}
-
-.resource-highlight {
-    display: inline-block;
-    background-color: #3498db;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    margin-top: 1rem;
-}
-
-.safety-checklist {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-}
-
-.safety-checklist h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #ffffff !important;
-    text-shadow: 0 0 15px rgba(0, 212, 255, 0.6);
-}
-
-.checklist-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-}
-
-.checklist-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.checklist-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 0, 128, 0.2);
-    transform: translateX(5px);
-}
-
-.checklist-item i {
-    color: #28a745;
-    font-size: 1.2rem;
-}
-
-.checklist-item span {
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-weight: 500;
-}
-</style>
 
 <%- include('partials/footer') %>
