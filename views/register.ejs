@@ -2,67 +2,73 @@
 
 <main class="main-content">
     <div class="auth-container">
-        <div class="auth-card fade-in-up">
+        <div class="auth-card card">
             <div class="auth-header">
                 <div style="text-align: center; margin-bottom: 1rem;">
-                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
-                        <i class="fas fa-user-shield" style="font-size: 2rem; color: white;"></i>
+                    <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                        <i class="fas fa-user-plus" style="font-size: 2rem; color: white;"></i>
                     </div>
                 </div>
-                <h2 style="color: white; margin-bottom: 0.5rem; font-family: 'Space Grotesk', sans-serif; font-weight: 900; font-size: 2.2rem; text-transform: uppercase; letter-spacing: 0.1em;">QUANTUM REGISTRY</h2>
-                <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem;">Initialize neural defense protocols</p>
+                <h2>Create Account</h2>
+                <p>Join our cybercrime prevention community</p>
             </div>
             
-            <form action="/register" method="POST" class="auth-form">
+            <form action="/register" method="POST" class="auth-form" id="registerForm">
                 <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" id="name" name="name" required>
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your full name">
                 </div>
                 
                 <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required>
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="your.email@example.com">
                 </div>
                 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone">
+                    <input type="tel" id="phone" name="phone" placeholder="Optional">
                 </div>
                 
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required minlength="6">
+                    <label for="password">Password *</label>
+                    <input type="password" id="password" name="password" required minlength="6" placeholder="Minimum 6 characters">
+                    <small>Must be at least 6 characters long</small>
                 </div>
                 
                 <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6">
+                    <label for="confirmPassword">Confirm Password *</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required minlength="6" placeholder="Re-enter your password">
                 </div>
                 
-                <button type="submit" class="btn btn-primary btn-full">Register</button>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
             </form>
             
             <div class="auth-footer">
-                <p style="text-align: center; color: rgba(255,255,255,0.8);">Already a member? <a href="/login" style="color: #06b6d4; font-weight: 700; text-decoration: none; font-family: 'Space Grotesk', sans-serif;">Access Portal →</a></p>
-                <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(113,128,150,0.2);">
-                    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-                        <small style="color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 0.25rem; font-weight: 500;">
-                            <svg width="16" height="16" fill="#06b6d4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Premium Access
-                        </small>
-                        <small style="color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 0.25rem; font-weight: 500;">
-                            <svg width="16" height="16" fill="#06b6d4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Elite Support
-                        </small>
-                        <small style="color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 0.25rem; font-weight: 500;">
-                            <svg width="16" height="16" fill="#06b6d4" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                            Zero-Trust Security
-                        </small>
-                    </div>
-                </div>
+                <p style="text-align: center; margin-top: 1rem;">Already have an account? <a href="/login" style="color: var(--primary); font-weight: 600;">Login here</a></p>
             </div>
         </div>
     </div>
 </main>
+
+<script>
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    
+    if (password !== confirmPassword) {
+        e.preventDefault();
+        alert('Passwords do not match!');
+        return false;
+    }
+    
+    if (password.length < 6) {
+        e.preventDefault();
+        alert('Password must be at least 6 characters long!');
+        return false;
+    }
+});
+</script>
 
 <%- include('partials/footer') %>
