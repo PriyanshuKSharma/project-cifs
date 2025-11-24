@@ -1,48 +1,17 @@
-// Main JavaScript file for the Cybercrime Prevention App
+// Simple JavaScript for Cybercrime Prevention Website
 
-// Enhanced navbar toggle function for all screen sizes
+// Mobile menu toggle
 function toggleMobileMenu() {
-    const navMenu = document.getElementById('navMenu');
-    const toggleBtn = document.querySelector('.mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const toggleBtn = document.querySelector('button[onclick="toggleMobileMenu()"]');
     const icon = toggleBtn.querySelector('i');
-    const isDesktop = window.innerWidth > 768;
     
-    // Add pulse animation to button
-    toggleBtn.style.animation = 'none';
-    setTimeout(() => {
-        toggleBtn.style.animation = 'quantumButton 3s ease-in-out infinite';
-    }, 100);
+    mobileMenu.classList.toggle('hidden');
     
-    // Handle different behaviors for desktop vs mobile
-    if (isDesktop) {
-        // Desktop behavior - slide/fade toggle
-        if (navMenu.classList.contains('collapsed')) {
-            navMenu.classList.remove('collapsed');
-            navMenu.classList.add('active');
-        } else {
-            navMenu.classList.add('collapsed');
-            navMenu.classList.remove('active');
-        }
+    if (mobileMenu.classList.contains('hidden')) {
+        icon.className = 'fas fa-bars';
     } else {
-        // Mobile behavior - dropdown toggle
-        navMenu.classList.toggle('active');
-    }
-    
-    // Enhanced icon transition with rotation
-    const isActive = navMenu.classList.contains('active') && !navMenu.classList.contains('collapsed');
-    
-    if (isActive) {
-        icon.style.transform = 'rotate(180deg)';
-        setTimeout(() => {
-            icon.className = 'fas fa-times';
-            icon.style.transform = 'rotate(0deg)';
-        }, 150);
-    } else {
-        icon.style.transform = 'rotate(-180deg)';
-        setTimeout(() => {
-            icon.className = 'fas fa-bars';
-            icon.style.transform = 'rotate(0deg)';
-        }, 150);
+        icon.className = 'fas fa-times';
     }
 }
 
@@ -70,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     isValid = false;
                     field.style.borderColor = '#e74c3c';
                 } else {
-                    field.style.borderColor = '#ddd';
+                    field.style.borderColor = '#dee2e6';
                 }
             });
 
@@ -104,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const file = this.files[0];
             if (file) {
                 const maxSize = 5 * 1024 * 1024; // 5MB
-                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+                const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf'];
                 
                 if (file.size > maxSize) {
                     showNotification('File size must be less than 5MB', 'error');
@@ -113,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 if (!allowedTypes.includes(file.type)) {
-                    showNotification('Invalid file type. Please upload JPG, PNG, GIF, PDF, DOC, or DOCX files only.', 'error');
+                    showNotification('Please upload JPG, PNG, GIF, or PDF files only.', 'error');
                     this.value = '';
                     return;
                 }
@@ -123,61 +92,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Smooth scrolling for anchor links
-    const anchorLinks = document.querySelectorAll('a[href^="#"]');
-    anchorLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Close navbar menu when clicking outside with enhanced animation
+    // Close mobile menu when clicking outside
     document.addEventListener('click', function(e) {
         const navMenu = document.getElementById('navMenu');
         const toggleBtn = document.querySelector('.mobile-menu-toggle');
-        const isDesktop = window.innerWidth > 768;
         
         if (navMenu && toggleBtn && !navMenu.contains(e.target) && !toggleBtn.contains(e.target)) {
-            const isMenuOpen = navMenu.classList.contains('active') && !navMenu.classList.contains('collapsed');
-            
-            if (isMenuOpen) {
-                if (isDesktop) {
-                    navMenu.classList.add('collapsed');
-                    navMenu.classList.remove('active');
-                } else {
-                    navMenu.classList.remove('active');
-                }
-                
-                const icon = toggleBtn.querySelector('i');
-                icon.style.transform = 'rotate(-180deg)';
-                setTimeout(() => {
-                    icon.className = 'fas fa-bars';
-                    icon.style.transform = 'rotate(0deg)';
-                }, 150);
+            if (navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                toggleBtn.querySelector('i').className = 'fas fa-bars';
             }
         }
     });
-    
-    // Handle window resize to reset navbar state
-    window.addEventListener('resize', function() {
-        const navMenu = document.getElementById('navMenu');
-        const toggleBtn = document.querySelector('.mobile-menu-toggle');
-        
-        if (navMenu && toggleBtn) {
-            navMenu.classList.remove('active', 'collapsed');
-            const icon = toggleBtn.querySelector('i');
-            icon.className = 'fas fa-bars';
-            icon.style.transform = 'rotate(0deg)';
-        }
-    });
-    
+
     // Close mobile menu when clicking on a link
     document.querySelectorAll('.nav-menu a').forEach(link => {
         link.addEventListener('click', function() {
@@ -212,13 +139,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Utility function to show notifications
+// Show notifications
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `alert alert-${type}`;
     notification.innerHTML = `<p>${message}</p>`;
     
-    // Insert at the top of the page
     const header = document.querySelector('.navbar');
     if (header) {
         header.insertAdjacentElement('afterend', notification);
@@ -226,7 +152,6 @@ function showNotification(message, type = 'info') {
         document.body.insertBefore(notification, document.body.firstChild);
     }
     
-    // Auto-remove after 5 seconds
     setTimeout(() => {
         notification.style.opacity = '0';
         setTimeout(() => {
@@ -235,7 +160,7 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Format dates consistently
+// Format dates
 function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', {
@@ -245,51 +170,11 @@ function formatDate(dateString) {
     });
 }
 
-// Copy text to clipboard
+// Copy to clipboard
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
         showNotification('Copied to clipboard!', 'success');
     }).catch(() => {
         showNotification('Failed to copy to clipboard', 'error');
-    });
-}
-
-// Loading state for forms
-function setFormLoading(form, loading = true) {
-    const submitButton = form.querySelector('button[type="submit"]');
-    const inputs = form.querySelectorAll('input, textarea, select');
-    
-    if (loading) {
-        submitButton.disabled = true;
-        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-        inputs.forEach(input => input.disabled = true);
-    } else {
-        submitButton.disabled = false;
-        submitButton.innerHTML = submitButton.getAttribute('data-original-text') || 'Submit';
-        inputs.forEach(input => input.disabled = false);
-    }
-}
-
-// Initialize tooltips (if using a tooltip library)
-function initTooltips() {
-    const tooltipElements = document.querySelectorAll('[data-tooltip]');
-    tooltipElements.forEach(element => {
-        element.addEventListener('mouseenter', function() {
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = this.getAttribute('data-tooltip');
-            document.body.appendChild(tooltip);
-            
-            const rect = this.getBoundingClientRect();
-            tooltip.style.left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2) + 'px';
-            tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + 'px';
-        });
-        
-        element.addEventListener('mouseleave', function() {
-            const tooltip = document.querySelector('.tooltip');
-            if (tooltip) {
-                tooltip.remove();
-            }
-        });
     });
 }
