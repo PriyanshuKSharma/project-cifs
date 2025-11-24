@@ -1,114 +1,583 @@
 <%- include('partials/header') %>
 
 <main class="main-content">
-    <section class="hero fade-in-up">
-        <div class="hero-content">
-            <h1 data-text="QUANTUM CYBER DEFENSE">QUANTUM CYBER DEFENSE</h1>
-            <p class="quantum-text">NEURAL QUANTUM ENCRYPTION • PREDICTIVE THREAT MATRIX • ZERO-LATENCY RESPONSE • MULTIDIMENSIONAL CYBER WARFARE PROTOCOLS</p>
-            <div class="hero-buttons">
-                <a href="/report/new" class="btn btn-primary">
-                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
-                    </svg>
-                    DEPLOY SHIELD
-                </a>
-                <a href="/tips" class="btn btn-secondary">
-                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                    </svg>
-                    COMMAND CENTER
-                </a>
-            </div>
+    <div class="container">
+    
+    <% if (typeof isAdmin !== 'undefined' && isAdmin) { %>
+        <!-- Admin Dashboard Section -->
+        <div class="form-header">
+            <h1>⚡ Admin Dashboard</h1>
+            <p>Cybercrime Reports Management System</p>
         </div>
-    </section>
 
-    <section class="features fade-in-up">
-        <div class="container">
-            <h2>ELITE DEFENSE MATRIX</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="margin-bottom: 2rem;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                    </svg>
-                    <h3>QUANTUM FORTRESS</h3>
-                    <p>Unbreakable quantum encryption protocols. Military-grade zero-trust architecture with neural network threat analysis and real-time adaptive defense systems.</p>
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <i class="fas fa-file-alt"></i>
+                <div class="stat-info">
+                    <h3><%= stats.total || 0 %></h3>
+                    <p>Total Reports</p>
                 </div>
-                <div class="feature-card">
-                    <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="margin-bottom: 2rem;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                    <h3>NEURAL RESPONSE</h3>
-                    <p>Quantum-speed threat classification with nanosecond response protocols. Critical incidents auto-escalated to elite cyber units in real-time.</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-clock"></i>
+                <div class="stat-info">
+                    <h3><%= stats.pending || 0 %></h3>
+                    <p>Pending</p>
                 </div>
-                <div class="feature-card">
-                    <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="margin-bottom: 2rem;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
-                    </svg>
-                    <h3>ORACLE SYSTEM</h3>
-                    <p>Advanced AI predicts cyber attacks before they materialize. Global threat intelligence network with quantum computing power for ultimate protection.</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-eye"></i>
+                <div class="stat-info">
+                    <h3><%= stats.review || 0 %></h3>
+                    <p>Under Review</p>
                 </div>
-                <div class="feature-card">
-                    <svg width="64" height="64" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="margin-bottom: 2rem;">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                    </svg>
-                    <h3>CYBER LEGION</h3>
-                    <p>Elite cyber warfare specialists on standby. Direct line to international cyber defense networks and quantum forensics teams worldwide.</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-check-circle"></i>
+                <div class="stat-info">
+                    <h3><%= stats.resolved || 0 %></h3>
+                    <p>Resolved</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <% if (tips && tips.length > 0) { %>
-    <section class="tips-preview">
-        <div class="container">
-            <h2>Latest Prevention Tips</h2>
-            <div class="tips-grid">
-                <% tips.forEach(function(tip, index) { %>
-                <div class="tip-card fade-in-up" style="animation-delay: <%= index * 0.1 %>s;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                        <i class="fas fa-lightbulb" style="color: #f39c12;"></i>
-                        <h3 style="margin: 0;"><%= tip.title %></h3>
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap;">
+            <a href="/admin/reports" class="btn btn-primary">
+                <i class="fas fa-list"></i> View All Reports
+            </a>
+            <a href="/admin/tips" class="btn btn-secondary">
+                <i class="fas fa-lightbulb"></i> Manage Tips
+            </a>
+        </div>
+
+        <% if (recentReports && recentReports.length > 0) { %>
+        <div class="card" style="margin-bottom: 3rem;">
+            <h2 style="font-size: 1.75rem; font-weight: 600; margin-bottom: 1.5rem;">📊 Recent Reports</h2>
+            <div class="reports-list">
+                <% recentReports.forEach(function(report) { %>
+                <div class="report-item">
+                    <div class="report-info">
+                        <h4><%= report.incident_type %></h4>
+                        <p><strong>Reporter:</strong> <%= report.user_name %></p>
+                        <p><%= report.description.substring(0, 100) %>...</p>
+                        <small>
+                            <i class="fas fa-calendar"></i> <%= new Date(report.created_at).toLocaleDateString() %>
+                        </small>
                     </div>
-                    <p><%= tip.content.substring(0, 150) %>...</p>
-                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(102,126,234,0.2);">
-                        <small style="color: #667eea; font-weight: 500;">💡 Pro Tip</small>
+                    <div class="report-status">
+                        <span class="status-badge status-<%= report.status %>">
+                            <%= report.status.charAt(0).toUpperCase() + report.status.slice(1) %>
+                        </span>
+                        <a href="/admin/report/<%= report.id %>" class="btn btn-sm btn-primary">
+                            <i class="fas fa-eye"></i> Review
+                        </a>
                     </div>
                 </div>
                 <% }); %>
             </div>
-            <div class="text-center">
-                <a href="/tips" class="btn btn-outline">View All Tips</a>
-            </div>
         </div>
-    </section>
-    <% } %>
-
-    <section class="emergency glass fade-in-up" style="margin: 2rem; padding: 3rem; text-align: center;">
-        <div class="container">
-            <div class="emergency-content">
-                <h2>QUANTUM COMMAND HQ</h2>
-                <p style="margin-bottom: 2rem; font-size: 1.1rem; opacity: 0.9;">Immediate assistance available for urgent cybercrime incidents</p>
-                <div class="contact-info" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-                    <div class="contact-item" style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 16px; backdrop-filter: blur(10px);">
-                        <i class="fas fa-phone-alt" style="font-size: 2.5rem; color: #ff6b6b; margin-bottom: 1rem;"></i>
-                        <div>
-                            <h4 style="color: white; margin-bottom: 0.5rem;">QUANTUM LINK</h4>
-                            <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; font-weight: 600;">1930</p>
-                            <small style="color: rgba(255,255,255,0.7);">Neural Interface • Instant Response</small>
-                        </div>
+        <% } %>
+    <% } else { %>
+        <!-- Regular Homepage Content -->
+        <div class="relative" id="home">
+        <div aria-hidden="true" class="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+            <div class="blur-[106px] h-56 bg-gradient-to-br from-indigo-600 to-purple-400 dark:from-blue-700"></div>
+            <div class="blur-[106px] h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="relative pt-36 ml-auto">
+                <div class="lg:w-2/3 text-center mx-auto">
+                    <h1 class="text-white font-bold text-5xl md:text-6xl xl:text-7xl" style="animation: 0.3s ease-in-out 0s 1 normal none running glitch; text-shadow: 0 0 20px rgba(255, 20, 147, 0.8);">
+                        ⚡ Protecting citizens from <span class="text-pink-400">cybercrime.</span>
+                    </h1>
+                    <p class="mt-8 text-white" style="text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
+                        Report cybercrime incidents safely and get help from our expert team. We're here to protect you and help make the internet safer for everyone.
+                    </p>
+                    <div class="mt-16 flex flex-wrap justify-center gap-y-4 gap-x-6">
+                        <a href="/report/new" class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-red-600 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max">
+                            <span class="relative text-base font-semibold text-white">Report Crime</span>
+                        </a>
+                        <a href="/tips" class="relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-indigo-600/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max">
+                            <span class="relative text-base font-semibold text-indigo-600 dark:text-white">Safety Tips</span>
+                        </a>
                     </div>
-                    <div class="contact-item" style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 16px; backdrop-filter: blur(10px);">
-                        <i class="fas fa-envelope-open-text" style="font-size: 2.5rem; color: #4ecdc4; margin-bottom: 1rem;"></i>
-                        <div>
-                            <h4 style="color: white; margin-bottom: 0.5rem;">QUANTUM CHANNEL</h4>
-                            <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; font-weight: 600;">quantum@cyberguard.pro</p>
-                            <small style="color: rgba(255,255,255,0.7);">Quantum Encrypted • Nano-response</small>
+                    <div class="hidden py-8 mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
+                        <div class="text-left">
+                            <h6 class="text-lg font-semibold text-gray-700 dark:text-white">24/7 Support</h6>
+                            <p class="mt-2 text-gray-500">Emergency helpline available</p>
+                        </div>
+                        <div class="text-left">
+                            <h6 class="text-lg font-semibold text-gray-700 dark:text-white">100% Confidential</h6>
+                            <p class="mt-2 text-gray-500">Your privacy is protected</p>
+                        </div>
+                        <div class="text-left">
+                            <h6 class="text-lg font-semibold text-gray-700 dark:text-white">Expert Team</h6>
+                            <p class="mt-2 text-gray-500">Trained cybercrime specialists</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="features" class="max-w-7xl mx-auto px-6">
+        <div class="md:w-2/3 lg:w-1/2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-secondary">
+                <path fill-rule="evenodd" d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5zM16.5 15a.75.75 0 01.712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 010 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 01-1.422 0l-.395-1.183a1.5 1.5 0 00-.948-.948l-1.183-.395a.75.75 0 010-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0116.5 15z" clip-rule="evenodd"></path>
+            </svg>
+            <h2 class="my-8 text-2xl font-bold text-white md:text-4xl" style="text-shadow: 0 0 20px rgba(255, 20, 147, 0.8);">
+                🛡️ How We Protect You
+            </h2>
+            <p class="text-white" style="text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
+                Advanced security measures and expert support to keep you safe in the digital world.
+            </p>
+        </div>
+        <div class="mt-16 grid divide-x divide-y divide-white/10 overflow-hidden rounded-3xl border border-white/10 text-white sm:grid-cols-2 lg:grid-cols-4 lg:divide-y-0 xl:grid-cols-4">
+            <div class="group relative transition hover:z-[1] hover:shadow-2xl hover:shadow-pink-600/20" style="background: linear-gradient(135deg, rgba(139, 69, 19, 0.1), rgba(75, 0, 130, 0.2), rgba(255, 20, 147, 0.1)); backdrop-filter: blur(20px);">
+                <div class="relative space-y-8 py-12 p-8">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900">
+                        <i class="fas fa-shield-alt text-indigo-600 dark:text-indigo-400 text-xl"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h5 class="text-xl font-semibold text-white transition" style="text-shadow: 0 0 15px rgba(255, 20, 147, 0.6);">
+                            Safe Reporting
+                        </h5>
+                        <p class="text-white" style="text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);">
+                            Report cybercrime incidents safely and securely. Your information is protected and handled by trained professionals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+                <div class="relative space-y-8 py-12 p-8">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-900">
+                        <i class="fas fa-clock text-red-600 dark:text-red-400 text-xl"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h5 class="text-xl font-semibold text-gray-700 dark:text-white transition group-hover:text-secondary">
+                            Quick Response
+                        </h5>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Our team reviews reports quickly and keeps you updated on the progress of your case.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+                <div class="relative space-y-8 py-12 p-8">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-yellow-100 dark:bg-yellow-900">
+                        <i class="fas fa-lightbulb text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h5 class="text-xl font-semibold text-gray-700 dark:text-white transition group-hover:text-secondary">
+                            Prevention Tips
+                        </h5>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Learn how to protect yourself online with easy-to-follow safety tips and best practices.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="group relative bg-white dark:bg-gray-800 transition hover:z-[1] hover:shadow-2xl hover:shadow-gray-600/10">
+                <div class="relative space-y-8 py-12 p-8">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-full bg-green-100 dark:bg-green-900">
+                        <i class="fas fa-users text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <h5 class="text-xl font-semibold text-gray-700 dark:text-white transition group-hover:text-secondary">
+                            Expert Support
+                        </h5>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Get help from cybercrime experts who understand the challenges you face online.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Stats for Logged-in Users -->
+    <% if (user) { %>
+    <div class="max-w-7xl mx-auto px-6 mb-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Welcome back, <%= user.name %>!</h2>
+            <p class="text-gray-600 dark:text-gray-300">Here's your cybercrime prevention dashboard</p>
+        </div>
+        
+        <!-- Stats Grid -->
+        <% if (user.role !== 'admin' && typeof reports !== 'undefined') { %>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-file-alt text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white"><%= reports.length %></h3>
+                        <p class="text-gray-600 dark:text-gray-300">Total Reports</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-clock text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white"><%= reports.filter(r => r.status === 'pending').length %></h3>
+                        <p class="text-gray-600 dark:text-gray-300">Pending</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white"><%= reports.filter(r => r.status === 'resolved').length %></h3>
+                        <p class="text-gray-600 dark:text-gray-300">Resolved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+        
+        <!-- Admin Stats -->
+        <% if (user.role === 'admin' && typeof stats !== 'undefined') { %>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-file-alt text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white"><%= stats.total %></h3>
+                        <p class="text-gray-600 dark:text-gray-300">Total Reports</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-clock text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white"><%= stats.pending %></h3>
+                        <p class="text-gray-600 dark:text-gray-300">Pending</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-eye text-orange-600 dark:text-orange-400 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white"><%= stats.review %></h3>
+                        <p class="text-gray-600 dark:text-gray-300">Under Review</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-check-circle text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white"><%= stats.resolved %></h3>
+                        <p class="text-gray-600 dark:text-gray-300">Resolved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+        
+        <!-- Quick Actions -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+            <% if (user.role !== 'admin') { %>
+                <a href="/report/new" class="relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-red-600 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
+                    <span class="relative text-base font-semibold text-white">
+                        <i class="fas fa-plus mr-2"></i>Submit New Report
+                    </span>
+                </a>
+                <a href="/reports" class="relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-indigo-600/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800">
+                    <span class="relative text-base font-semibold text-indigo-600 dark:text-white">
+                        <i class="fas fa-folder-open mr-2"></i>View Reports
+                    </span>
+                </a>
+            <% } else { %>
+                <a href="/admin/reports" class="relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-indigo-600 before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95">
+                    <span class="relative text-base font-semibold text-white">
+                        <i class="fas fa-cog mr-2"></i>Manage Reports
+                    </span>
+                </a>
+                <a href="/admin/dashboard" class="relative flex h-11 items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-indigo-600/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800">
+                    <span class="relative text-base font-semibold text-indigo-600 dark:text-white">
+                        <i class="fas fa-tachometer-alt mr-2"></i>Admin Dashboard
+                    </span>
+                </a>
+            <% } %>
+        </div>
+        
+        <!-- Recent Reports for Users -->
+        <% if (user.role !== 'admin' && typeof reports !== 'undefined' && reports.length > 0) { %>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 mb-12">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                <i class="fas fa-history text-indigo-600 mr-3"></i>Recent Reports
+            </h3>
+            <div class="space-y-4">
+                <% reports.slice(0, 3).forEach(report => { %>
+                <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-gray-900 dark:text-white"><%= report.incident_type %></h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1"><%= report.description.substring(0, 80) %>...</p>
+                        <small class="text-gray-500 dark:text-gray-400">
+                            <i class="fas fa-calendar mr-1"></i><%= new Date(report.created_at).toLocaleDateString() %>
+                        </small>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="px-3 py-1 rounded-full text-xs font-medium
+                            <% if (report.status === 'pending') { %>bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200<% } %>
+                            <% if (report.status === 'review') { %>bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200<% } %>
+                            <% if (report.status === 'resolved') { %>bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200<% } %>
+                            <% if (report.status === 'rejected') { %>bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200<% } %>">
+                            <%= report.status.charAt(0).toUpperCase() + report.status.slice(1) %>
+                        </span>
+                        <a href="/report/<%= report.id %>" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            <div class="text-center mt-6">
+                <a href="/reports" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 font-medium">
+                    View All Reports <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+        <% } %>
+        
+        <!-- Recent Reports for Admin -->
+        <% if (user.role === 'admin' && typeof recentReports !== 'undefined' && recentReports.length > 0) { %>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-100 dark:border-gray-700 mb-12">
+            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                <i class="fas fa-clipboard-list text-indigo-600 mr-3"></i>Recent Reports to Review
+            </h3>
+            <div class="space-y-4">
+                <% recentReports.slice(0, 5).forEach(report => { %>
+                <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="flex-1">
+                        <h4 class="font-semibold text-gray-900 dark:text-white"><%= report.incident_type %></h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Reporter: <%= report.user_name %></p>
+                        <small class="text-gray-500 dark:text-gray-400">
+                            <i class="fas fa-calendar mr-1"></i><%= new Date(report.created_at).toLocaleDateString() %>
+                        </small>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="px-3 py-1 rounded-full text-xs font-medium
+                            <% if (report.status === 'pending') { %>bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200<% } %>
+                            <% if (report.status === 'review') { %>bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200<% } %>
+                            <% if (report.status === 'resolved') { %>bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200<% } %>
+                            <% if (report.status === 'rejected') { %>bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200<% } %>">
+                            <%= report.status.charAt(0).toUpperCase() + report.status.slice(1) %>
+                        </span>
+                        <a href="/admin/report/<%= report.id %>" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </div>
+                </div>
+                <% }); %>
+            </div>
+            <div class="text-center mt-6">
+                <a href="/admin/reports" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 font-medium">
+                    Manage All Reports <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+        <% } %>
+    </div>
+    <% } %>
+    
+    <!-- Tips Section -->
+    <% if (tips && tips.length > 0) { %>
+    <div class="max-w-7xl mx-auto px-6 mb-20">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Latest Prevention Tips</h2>
+            <p class="text-gray-600 dark:text-gray-300">Stay informed with the latest cybersecurity advice</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% tips.forEach(function(tip, index) { %>
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-100 dark:border-gray-700 hover:shadow-lg transition-shadow">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-lightbulb text-yellow-600 dark:text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white"><%= tip.title %></h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed"><%= tip.content.substring(0, 150) %>...</p>
+                <div class="pt-4 border-t border-gray-100 dark:border-gray-700">
+                    <small class="text-gray-500 dark:text-gray-400">Safety Tip</small>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+        <div class="text-center mt-12">
+            <a href="/tips" class="relative flex h-11 w-fit mx-auto items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-indigo-600/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800">
+                <span class="relative text-base font-semibold text-indigo-600 dark:text-white">View All Tips</span>
+            </a>
+        </div>
+    </div>
+    <% } %>
+
+    <section class="relative z-10 py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="relative bg-gradient-to-br from-red-500/10 via-pink-500/10 to-purple-500/10 backdrop-blur-2xl border border-white/20 rounded-3xl p-12 overflow-hidden">
+                <!-- Animated background elements -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-red-500/20 to-pink-500/20 rounded-full blur-3xl animate-pulse"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-br from-purple-500/20 to-blue-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: -1s;"></div>
+                
+                <div class="relative z-10 text-center">
+                    <div class="inline-flex items-center bg-red-500/20 backdrop-blur-lg border border-red-500/30 rounded-full px-6 py-3 mb-8">
+                        <div class="w-3 h-3 bg-red-400 rounded-full mr-3 animate-pulse"></div>
+                        <span class="text-white font-medium">🆘 EMERGENCY RESPONSE ACTIVE</span>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        <span class="bg-gradient-to-r from-red-300 to-pink-300 bg-clip-text text-transparent">Need Immediate Help?</span>
+                    </h2>
+                    <p class="text-xl text-white/80 mb-12 max-w-3xl mx-auto">Our emergency response team is standing by 24/7 to assist with urgent cybercrime incidents</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                        <div class="group relative bg-gradient-to-br from-red-500/20 to-pink-500/20 backdrop-blur-lg border border-red-500/30 rounded-2xl p-8 hover:border-red-400/50 transition-all duration-300 transform hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="relative z-10">
+                                <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300">
+                                    <i class="fas fa-phone text-2xl text-white"></i>
+                                </div>
+                                <h4 class="text-2xl font-bold text-white mb-4">Emergency Hotline</h4>
+                                <div class="text-4xl font-black text-red-300 mb-4 font-mono tracking-wider">1930</div>
+                                <div class="flex items-center justify-center text-white/70">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                                    <span>Available 24/7 • Instant Connect</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="group relative bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-lg border border-blue-500/30 rounded-2xl p-8 hover:border-blue-400/50 transition-all duration-300 transform hover:scale-105">
+                            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            <div class="relative z-10">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-12 transition-transform duration-300">
+                                    <i class="fas fa-envelope text-2xl text-white"></i>
+                                </div>
+                                <h4 class="text-2xl font-bold text-white mb-4">Secure Email</h4>
+                                <div class="text-lg font-semibold text-blue-300 mb-4 break-all">report@cybercrime.gov.in</div>
+                                <div class="flex items-center justify-center text-white/70">
+                                    <div class="w-2 h-2 bg-blue-400 rounded-full mr-2 animate-pulse"></div>
+                                    <span>Encrypted • Priority Response</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 p-6 bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl">
+                        <p class="text-white/80 text-lg">
+                            <i class="fas fa-info-circle text-cyan-400 mr-2"></i>
+                            For non-urgent matters, use our <a href="/report/new" class="text-cyan-300 hover:text-cyan-200 underline transition-colors">online reporting system</a> or browse our <a href="/tips" class="text-purple-300 hover:text-purple-200 underline transition-colors">safety resources</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
+    <% } %>
+    
+    <!-- Original Homepage Content (Always Show) -->
+    <div style="margin-top: 4rem;">
+        <div class="hero">
+            <div class="hero-content">
+                <h1><i class="fas fa-shield-alt"></i> Protecting citizens from cybercrime</h1>
+                <p>Report cybercrime incidents safely and get help from our expert team. We're here to protect you and help make the internet safer for everyone.</p>
+                <div class="hero-buttons">
+                    <% if (!user || user.role !== 'admin') { %>
+                        <a href="/report/new" class="btn btn-primary">
+                            <i class="fas fa-exclamation-triangle"></i> Report Crime
+                        </a>
+                    <% } %>
+                    <a href="/tips" class="btn btn-outline">
+                        <i class="fas fa-lightbulb"></i> Safety Tips
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2><i class="fas fa-shield-alt"></i> How We Protect You</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safe Reporting</h3>
+                    <p>Report cybercrime incidents safely and securely. Your information is protected and handled by trained professionals.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Quick Response</h3>
+                    <p>Our team reviews reports quickly and keeps you updated on the progress of your case.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Prevention Tips</h3>
+                    <p>Learn how to protect yourself online with easy-to-follow safety tips and best practices.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Expert Support</h3>
+                    <p>Get help from cybercrime experts who understand the challenges you face online.</p>
+                </div>
+            </div>
+        </div>
+
+        <% if (tips && tips.length > 0) { %>
+        <div style="margin-top: 4rem;">
+            <h2 style="font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2rem;">Latest Prevention Tips</h2>
+            <div class="tips-grid">
+                <% tips.forEach(function(tip) { %>
+                <div class="tip-card">
+                    <h3><i class="fas fa-lightbulb"></i> <%= tip.title %></h3>
+                    <p><%= tip.content.substring(0, 150) %>...</p>
+                </div>
+                <% }); %>
+            </div>
+            <div class="text-center" style="margin-top: 2rem;">
+                <a href="/tips" class="btn btn-outline">View All Tips</a>
+            </div>
+        </div>
+        <% } %>
+
+        <div class="card" style="margin-top: 4rem; text-align: center;">
+            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">🆘 Need Immediate Help?</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-muted);">Our emergency response team is standing by 24/7 to assist with urgent cybercrime incidents</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div class="feature-card">
+                    <i class="fas fa-phone" style="color: var(--danger);"></i>
+                    <h3>Emergency Hotline</h3>
+                    <div style="font-size: 2rem; font-weight: 700; color: var(--danger); margin: 1rem 0;">1930</div>
+                    <span class="status-badge status-resolved">Available 24/7</span>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-envelope" style="color: var(--primary);"></i>
+                    <h3>Secure Email</h3>
+                    <div style="font-size: 1rem; font-weight: 600; color: var(--primary); margin: 1rem 0;">report@cybercrime.gov.in</div>
+                    <span class="status-badge status-review">Encrypted Response</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    </div>
 </main>
 
 <%- include('partials/footer') %>
