@@ -44,11 +44,10 @@ const requireAuth = (req, res, next) => {
 router.get('/dashboard', requireAuth, async (req, res) => {
   try {
     const reports = await Report.findByUserId(req.session.user.id);
-    const tips = await Tip.findAll();
-    res.render('dashboard', { reports: reports.slice(0, 5), tips: tips.slice(0, 3) });
+    res.render('dashboard', { reports });
   } catch (error) {
     req.flash('error', 'Error loading dashboard');
-    res.render('dashboard', { reports: [], tips: [] });
+    res.render('dashboard', { reports: [] });
   }
 });
 
@@ -107,14 +106,6 @@ router.get('/report/:id', requireAuth, async (req, res) => {
   }
 });
 
-// Prevention tips
-router.get('/tips', async (req, res) => {
-  try {
-    const tips = await Tip.findAll();
-    res.render('tips', { tips });
-  } catch (error) {
-    res.render('tips', { tips: [] });
-  }
-});
+
 
 module.exports = router;
