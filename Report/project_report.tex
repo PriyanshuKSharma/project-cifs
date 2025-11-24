@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt,a4paper]{report}
 \usepackage[utf8]{inputenc}
 \usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
@@ -8,6 +8,39 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
+
+% Code listing style
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{codestyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{black},
+    xleftmargin=10pt,
+    xrightmargin=10pt,
+    framexleftmargin=5pt,
+    framexrightmargin=5pt
+}
+
+\lstset{style=codestyle}
 \usepackage{fancyhdr}
 \usepackage{titlesec}
 \usepackage{tocloft}
@@ -18,8 +51,15 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 
+
+\begin{figure}
+    \includegraphics[width=1\linewidth]{adypu-logo.png}
+\end{figure}
+    
+
+
 \title{CyberGuard: A Comprehensive Cybercrime Prevention and Reporting Web Application}
-\author{Priyanshu Kumar Sharma, Vaibhav Gulge \\ BTech IT (CTIS) | SEM: 7}
+\author{Priyanshu Kumar Sharma | 2022-B-17102004A \\ Vaibhav Gulge | 2022-B-08062004A \\ Prof: Ravi Khatri \\ BTech IT (CTIS) | SEM: 7}
 \date{\today}
 
 
@@ -29,39 +69,513 @@
 
 \maketitle
 
+% Certificate
+\newpage
+\section*{Certificate}
+\addcontentsline{toc}{section}{Certificate}
+
+This is to certify that the project entitled \textbf{"CyberGuard: A Comprehensive Cybercrime Prevention and Reporting Web Application"} submitted by \textbf{Priyanshu Kumar Sharma (2022-B-17102004A)} and \textbf{Vaibhav Gulge (2022-B-08062004A)} in partial fulfillment of the requirements for the award of Bachelor of Technology degree in Information Technology (Cyber Technology and Information Security) at Ajeenkya DY Patil University, Pune is a record of bonafide work carried out by them under my supervision and guidance.
+
+\vspace{2cm}
+
+\noindent
+\textbf{Prof. Ravi Khatri} \\
+Project Guide \\
+Department of IT (CTIS) \\
+Ajeenkya DY Patil University
+
+\vspace{2cm}
+
+\noindent
+\textbf{Date:} \underline{\hspace{3cm}} \hspace{2cm} \textbf{Place:} Pune
+
+% Declaration
+\newpage
+\section*{Declaration}
+\addcontentsline{toc}{section}{Declaration}
+
+We, \textbf{Priyanshu Kumar Sharma (2022-B-17102004A)} and \textbf{Vaibhav Gulge (2022-B-08062004A)}, students of Bachelor of Technology in Information Technology (Cyber Technology and Information Security), Ajeenkya DY Patil University, Pune, hereby declare that the project work entitled \textbf{"CyberGuard: A Comprehensive Cybercrime Prevention and Reporting Web Application"} submitted in partial fulfillment of the requirements for the award of the degree of Bachelor of Technology is the result of our own work carried out under the supervision of \textbf{Prof. Ravi Khatri}.
+
+\vspace{1cm}
+
+We further declare that this project work has not been submitted to any other university or institution for the award of any degree or diploma.
+
+\vspace{1cm}
+
+We have followed all ethical practices while carrying out this research work and have properly cited and referenced all sources used in this project.
+
+\vspace{3cm}
+
+\noindent
+\begin{tabular}{@{}ll}
+\textbf{Priyanshu Kumar Sharma} & \textbf{Vaibhav Gulge} \\
+Roll No: 2022-B-17102004A & Roll No: 2022-B-08062004A \\
+\end{tabular}
+
+\vspace{2cm}
+
+\noindent
+\textbf{Date:} \underline{\hspace{3cm}} \hspace{2cm} \textbf{Place:} Pune
+
+% Acknowledgement
+\newpage
+\section*{Acknowledgement}
+\addcontentsline{toc}{section}{Acknowledgement}
+
+This project wouldn't have been possible without help from many people.
+
+\vspace{0.5cm}
+
+First, we want to thank our project guide, \textbf{Prof. Ravi Khatri}. He guided us through countless challenges during development and his cybersecurity expertise really shaped how we approached security in the application. Whenever we got stuck on a problem, his suggestions pointed us in the right direction.
+
+\vspace{0.5cm}
+
+
+
+We would like to thank \textbf{Ajeenkya DY Patil University} for providing an excellent academic environment and infrastructure that enabled us to pursue this research work.
+
+\vspace{0.5cm}
+
+Our sincere thanks to all the faculty members of the Department of IT (CTIS) for their valuable suggestions and support during various stages of this project.
+
+\vspace{0.5cm}
+
+We are thankful to our fellow students and friends who provided constructive feedback during the development and testing phases of the application.
+
+\vspace{0.5cm}
+
+We acknowledge the open-source community for providing excellent tools, frameworks, and libraries that made this project possible, including Node.js, Express.js, MySQL, PostgreSQL, and various other technologies.
+
+\vspace{0.5cm}
+
+Finally, we express our deepest gratitude to our families for their unwavering support, patience, and encouragement throughout our academic journey.
+
+\vspace{2cm}
+
+\noindent
+\textbf{Priyanshu Kumar Sharma \\ Vaibhav Gulge}
+
 \begin{abstract}
-Cybercrime has emerged as one of the most significant threats in our digital society, with damages projected to reach \$10.5 trillion annually by 2025. Traditional cybercrime reporting mechanisms often involve complex bureaucratic processes that discourage victims from reporting incidents. This project presents CyberGuard, a comprehensive web-based cybercrime prevention and reporting system designed to bridge the gap between cybercrime victims and law enforcement agencies.
+Cybercrime is becoming a massive problem in today's digital world. Experts predict damages could hit \$10.5 trillion per year by 2025. When we looked at existing reporting systems, we found they're often too complicated and bureaucratic, which stops people from reporting crimes. That's why we created CyberGuard - a web application that makes it easier for victims to report cybercrimes and for law enforcement to manage these cases.
 
-The system implements a three-tier architecture using Node.js, Express.js, and responsive frontend technologies to deliver a secure, user-friendly platform. Key features include role-based access control, comprehensive incident reporting with evidence attachment capabilities, real-time case tracking, and educational resources for cybersecurity awareness. The application supports multiple cybercrime categories including phishing, identity theft, financial fraud, cyberbullying, and ransomware attacks.
+We built the system using Node.js and Express.js with a three-tier architecture. The platform lets users report different types of cybercrimes like phishing, identity theft, fraud, and cyberbullying. Users can attach evidence files, track their case status in real-time, and access educational resources about staying safe online. We also added role-based access so admins can manage reports efficiently.
 
-Security measures include bcrypt password hashing, input validation following OWASP guidelines, secure file upload mechanisms, and session management with HTTP-only cookies. The system is deployed on cloud infrastructure using Render.com, providing scalability and high availability for public access.
+Security was crucial since we're handling sensitive data. We implemented bcrypt for password hashing, followed OWASP guidelines for input validation, and used HTTP-only cookies for sessions. The application runs on Render.com's cloud infrastructure, which gives us good scalability.
 
-Testing encompasses functional, security, performance, and usability evaluation, demonstrating the system's effectiveness in serving both technical and non-technical users. The implementation successfully addresses accessibility barriers, provides transparency in case progress, and offers comprehensive evidence collection guidance.
+We tested everything thoroughly - functionality, security, performance, and usability. The results were encouraging: page loads under 2 seconds, handles multiple users simultaneously, and works well on different devices. Both tech-savvy and non-technical users found it easy to navigate.
 
-Results show that the system achieves sub-2-second response times, handles concurrent users effectively, and maintains security standards for sensitive data protection. User experience evaluation confirms intuitive navigation and successful task completion across various devices and user skill levels.
-
-The project contributes to cybersecurity infrastructure by providing an accessible reporting platform that encourages incident documentation while supporting effective case management for law enforcement. Future enhancements include mobile applications, advanced analytics, and integration with external cybersecurity systems.
+This project fills a real gap in cybersecurity infrastructure by making reporting accessible to everyone. Down the road, we're planning to add mobile apps, better analytics, and integrate with other cybersecurity systems.
 \end{abstract}
 
 \newpage
 \tableofcontents
 \newpage
+\listoffigures
+\newpage
+\listoftables
+\newpage
 
-\section{Executive Summary}
+\chapter{Introduction}
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
-The CyberGuard project represents a comprehensive web-based solution designed to address the growing concerns of cybercrime in our digital society. This application serves as a centralized platform where citizens can report cybercrime incidents, track their case progress, and access valuable prevention resources. The system incorporates modern web technologies including Node.js, Express.js, and responsive frontend design to deliver a secure, user-friendly experience.
+CyberGuard started from a simple observation: reporting cybercrimes is way too complicated. During our research, we talked to people who'd been victims of online fraud and phishing attacks. Many told us they didn't bother reporting because the process seemed overwhelming. That's when we decided to build something better.
 
-The primary objective of this project is to bridge the gap between cybercrime victims and law enforcement agencies by providing an accessible, secure, and efficient reporting mechanism. The application features role-based access control, comprehensive incident management, and educational resources to empower users with cybersecurity knowledge.
+Our goal was straightforward - create a web platform where anyone can report cybercrimes without needing a computer science degree. We wanted to connect victims with law enforcement more effectively while also teaching people how to protect themselves online. The application needed to be secure (obviously, given the sensitive nature of the data) but also simple enough for your grandmother to use.
 
-Key achievements include the successful implementation of a full-stack web application with robust security measures, deployment on cloud infrastructure, and creation of an intuitive user interface that accommodates both technical and non-technical users. The system supports multiple types of cybercrime reporting, evidence attachment capabilities, and administrative tools for case management.
+We spent several months building this full-stack application using Node.js and Express.js. The frontend uses responsive design so it works on phones, tablets, and computers. We deployed everything on cloud infrastructure to ensure it stays online and can handle traffic spikes. The system now supports various cybercrime types - from phishing and identity theft to cyberbullying and ransomware. Users can upload evidence, track their cases, and admins get tools to manage everything efficiently.ment.
 
-\section{Introduction}
-
-\subsection{Background and Motivation}
+\section{Background and Need for the Project}
 
 In the contemporary digital landscape, cybercrime has emerged as one of the most significant threats to individuals, businesses, and governments worldwide. The rapid digitization of services, accelerated by global events such as the COVID-19 pandemic, has created new vulnerabilities and attack vectors that cybercriminals exploit with increasing sophistication.
 
-According to recent statistics from cybersecurity organizations, cybercrime damages are projected to reach \$10.5 trillion annually by 2025 \citep{morgan2020cybersecurity}, with financial losses running into trillions of dollars annually. The types of cybercrimes have evolved from simple email scams to complex multi-stage attacks involving social engineering, advanced persistent threats, and sophisticated malware campaigns.
+According to recent statistics from cybersecurity organizations, cybercrime damages are projected to reach \$10.5 trillion annually by 2025, with financial losses running into trillions of dollars annually. The types of cybercrimes have evolved from simple email scams to complex multi-stage attacks involving social engineering, advanced persistent threats, and sophisticated malware campaigns.
+
+Traditional reporting mechanisms for cybercrime often involve complex bureaucratic processes, multiple agencies, and lengthy procedures that discourage victims from reporting incidents. Many victims are unaware of proper reporting channels, lack technical knowledge to document incidents effectively, or fear that their reports will not be taken seriously or acted upon promptly.
+
+\section{Societal Relevance}
+
+The CyberGuard project addresses critical societal needs in the digital age:
+
+\textbf{Public Safety:} By providing an accessible platform for reporting cybercrimes, the system contributes to public safety by enabling law enforcement to identify patterns, track criminals, and prevent future incidents.
+
+\textbf{Victim Support:} The platform offers victims a safe, confidential way to report incidents while providing educational resources to prevent future victimization.
+
+\textbf{Law Enforcement Support:} The structured data collection and case management tools help law enforcement agencies efficiently process and investigate cybercrime reports.
+
+\textbf{Community Awareness:} Educational resources and prevention tips help build community resilience against cyber threats.
+
+\textbf{Data-Driven Policy:} Aggregated reporting data can inform policy decisions and resource allocation for cybersecurity initiatives.
+
+\section{Problem Statement}
+
+The current cybercrime reporting ecosystem faces several critical challenges:
+
+\begin{itemize}
+\item \textbf{Accessibility Barriers:} Existing systems are often designed for technical users, creating barriers for ordinary citizens
+\item \textbf{Fragmented Channels:} Victims struggle to identify appropriate authorities for different cybercrime types
+\item \textbf{Lack of Transparency:} Limited visibility into case progress leaves victims uncertain about report status
+\item \textbf{Insufficient Evidence Collection:} Victims lack guidance on proper digital evidence preservation
+\item \textbf{Limited Education:} Gap in accessible cybersecurity education for prevention
+\end{itemize}
+
+\section{Objectives of the Project}
+
+\subsection{Primary Objectives}
+\begin{itemize}
+\item Develop a user-friendly web application for cybercrime reporting accessible to all skill levels
+\item Implement secure authentication and authorization systems
+\item Create comprehensive incident reporting forms
+\item Establish robust case management system for administrators
+\item Provide educational resources and prevention tips
+\end{itemize}
+
+\subsection{Secondary Objectives}
+\begin{itemize}
+\item Deploy on cloud infrastructure for high availability
+\item Implement responsive design for all devices
+\item Establish logging and monitoring systems
+\item Create detailed documentation
+\item Develop API endpoints for future integrations
+\end{itemize}
+
+\section{Scope and Limitations}
+
+\subsection{Scope}
+\begin{itemize}
+\item Web-based cybercrime reporting platform
+\item User registration and authentication
+\item Multiple cybercrime category support
+\item Evidence file upload capabilities
+\item Admin dashboard for case management
+\item Educational content management
+\item Cloud deployment with database support
+\end{itemize}
+
+\subsection{Limitations}
+\begin{itemize}
+\item No real-time chat support in current version
+\item Limited to English language
+\item No mobile native application
+\item No integration with external law enforcement systems
+\item Manual admin response required for case updates
+\end{itemize}
+
+\chapter{Literature Review}
+
+\section{Review of Existing Work}
+
+\subsection{Government Cybercrime Reporting Systems}
+
+Government-operated systems such as the FBI's Internet Crime Complaint Center (IC3) and India's Cybercrime Portal provide official channels for reporting cybercrimes. These systems offer:
+
+\begin{itemize}
+\item Official authority and legal backing
+\item Direct connection to law enforcement
+\item Comprehensive data collection
+\item National-level coordination
+\end{itemize}
+
+However, they often suffer from:
+\begin{itemize}
+\item Complex user interfaces
+\item Limited feedback mechanisms
+\item Slow response times
+\item Technical jargon that confuses non-technical users
+\end{itemize}
+
+\subsection{Private Sector Solutions}
+
+Cybersecurity companies and technology firms have developed various reporting platforms:
+
+\begin{itemize}
+\item More user-friendly interfaces
+\item Better mobile support
+\item Faster response times
+\item Integration with security tools
+\end{itemize}
+
+Limitations include:
+\begin{itemize}
+\item Lack of official authority
+\item Limited investigative capabilities
+\item Privacy concerns with private data handling
+\item Cost barriers for some services
+\end{itemize}
+
+\subsection{Academic Research}
+
+Research studies have identified key factors for effective cybercrime reporting:
+
+\begin{itemize}
+\item User experience design significantly impacts reporting rates
+\item Trust and credibility are crucial for victim engagement
+\item Educational components improve prevention
+\item Mobile accessibility increases reporting
+\end{itemize}
+
+\section{Gaps in Current Solutions}
+
+\begin{enumerate}
+\item \textbf{Usability Gap:} Most systems prioritize functionality over user experience
+\item \textbf{Transparency Gap:} Limited visibility into case progress and outcomes
+\item \textbf{Education Gap:} Insufficient integration of prevention education with reporting
+\item \textbf{Accessibility Gap:} Poor mobile support and complex interfaces
+\item \textbf{Feedback Gap:} Minimal communication between victims and investigators
+\end{enumerate}
+
+\section{Justification for Proposed Work}
+
+CyberGuard addresses identified gaps by:
+
+\begin{itemize}
+\item \textbf{User-Centered Design:} Intuitive interface for all skill levels
+\item \textbf{Transparency:} Real-time case tracking and status updates
+\item \textbf{Integrated Education:} Prevention tips alongside reporting
+\item \textbf{Responsive Design:} Full functionality across all devices
+\item \textbf{Open Communication:} Admin response system for victim updates
+\item \textbf{Modern Technology:} Scalable, secure, cloud-based architecture
+\end{itemize}
+
+\chapter{Methodology and System Design}
+
+\section{Technology Stack}
+
+\subsection{Backend Technologies}
+\begin{itemize}
+\item \textbf{Runtime:} Node.js v18+ for server-side JavaScript execution
+\item \textbf{Framework:} Express.js for web application framework
+\item \textbf{Database:} MySQL/PostgreSQL for data persistence
+\item \textbf{Authentication:} bcrypt for password hashing
+\item \textbf{Session Management:} express-session with secure cookies
+\end{itemize}
+
+\subsection{Frontend Technologies}
+\begin{itemize}
+\item \textbf{Templating:} EJS (Embedded JavaScript)
+\item \textbf{Styling:} Tailwind CSS for responsive design
+\item \textbf{JavaScript:} Vanilla JS for client-side interactions
+\item \textbf{Icons:} Font Awesome for UI icons
+\end{itemize}
+
+\subsection{Security Tools}
+\begin{itemize}
+\item \textbf{Password Hashing:} bcrypt with salt rounds
+\item \textbf{Input Validation:} express-validator
+\item \textbf{File Upload:} Multer with security configurations
+\item \textbf{Session Security:} HTTP-only cookies, CSRF protection
+\end{itemize}
+
+\section{Database Design}
+
+\subsection{Users Table}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Field} & \textbf{Type} & \textbf{Description} \\ \hline
+id & INT (PK) & Unique user identifier \\ \hline
+name & VARCHAR(255) & User full name \\ \hline
+email & VARCHAR(255) & Unique email address \\ \hline
+phone & VARCHAR(20) & Contact number \\ \hline
+password & VARCHAR(255) & Hashed password \\ \hline
+role & ENUM & user/admin role \\ \hline
+created\_at & TIMESTAMP & Account creation time \\ \hline
+\end{tabular}
+\caption{Users Table Schema}
+\end{table}
+
+\subsection{Reports Table}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Field} & \textbf{Type} & \textbf{Description} \\ \hline
+id & INT (PK) & Unique report identifier \\ \hline
+user\_id & INT (FK) & Reference to user \\ \hline
+incident\_type & VARCHAR(100) & Type of cybercrime \\ \hline
+description & TEXT & Detailed description \\ \hline
+evidence\_file & VARCHAR(255) & Uploaded file path \\ \hline
+incident\_date & DATE & When incident occurred \\ \hline
+location & VARCHAR(255) & Incident location \\ \hline
+status & ENUM & pending/review/resolved \\ \hline
+admin\_response & TEXT & Admin comments \\ \hline
+created\_at & TIMESTAMP & Report submission time \\ \hline
+\end{tabular}
+\caption{Reports Table Schema}
+\end{table}
+
+\subsection{Tips Table}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Field} & \textbf{Type} & \textbf{Description} \\ \hline
+id & INT (PK) & Unique tip identifier \\ \hline
+title & VARCHAR(255) & Tip title \\ \hline
+content & TEXT & Tip content \\ \hline
+created\_at & TIMESTAMP & Creation time \\ \hline
+\end{tabular}
+\caption{Tips Table Schema}
+\end{table}
+
+\section{Security Architecture}
+
+\subsection{Authentication Security}
+\begin{itemize}
+\item Password hashing using bcrypt (10 salt rounds)
+\item Secure session management with HTTP-only cookies
+\item Session expiration after 24 hours
+\item Protection against brute force attacks
+\end{itemize}
+
+\subsection{Input Validation}
+\begin{itemize}
+\item Client-side validation for user experience
+\item Server-side validation for security
+\item SQL injection prevention through parameterized queries
+\item XSS protection through input sanitization
+\end{itemize}
+
+\subsection{File Upload Security}
+\begin{itemize}
+\item File type validation (images, PDFs, documents only)
+\item File size limits (5MB maximum)
+\item Secure storage in isolated directory
+\item Controlled access through authentication
+\end{itemize}
+
+\section{Network Topology}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[node distance=2.5cm]
+\node (client) [draw, rectangle] {Client Browser};
+\node (server) [draw, rectangle, below of=client] {Express.js Server};
+\node (db) [draw, rectangle, below of=server] {MySQL/PostgreSQL};
+\node (storage) [draw, rectangle, right of=server, xshift=2cm] {File Storage};
+
+\draw[->] (client) -- node[right] {HTTPS} (server);
+\draw[->] (server) -- node[right] {SQL Queries} (db);
+\draw[->] (server) -- node[above] {File I/O} (storage);
+\end{tikzpicture}
+\caption{System Network Topology}
+\end{figure}
+
+\chapter{Tools and Technologies}
+
+\section{Backend Development Tools}
+
+\subsection{Node.js and Express.js}
+\textbf{Purpose:} Server-side application framework
+
+\textbf{Features Used:}
+\begin{itemize}
+\item RESTful API routing
+\item Middleware for authentication
+\item Session management
+\item Error handling
+\end{itemize}
+
+\textbf{Implementation:}
+\begin{lstlisting}[language=JavaScript]
+const express = require('express');
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+\end{lstlisting}
+
+\subsection{bcrypt Password Hashing}
+\textbf{Purpose:} Secure password storage
+
+\textbf{Implementation:}
+\begin{lstlisting}[language=JavaScript]
+const bcrypt = require('bcrypt');
+const hashedPassword = await bcrypt.hash(password, 10);
+const isValid = await bcrypt.compare(plain, hashed);
+\end{lstlisting}
+
+\subsection{Multer File Upload}
+\textbf{Purpose:} Handle multipart/form-data for file uploads
+
+\textbf{Configuration:}
+\begin{lstlisting}[language=JavaScript]
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+const upload = multer({ 
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 }
+});
+\end{lstlisting}
+
+\section{Database Management}
+
+\subsection{MySQL/PostgreSQL}
+\textbf{Purpose:} Relational database for data persistence
+
+\textbf{Connection Setup:}
+\begin{lstlisting}[language=JavaScript]
+const mysql = require('mysql2');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'cybercrime_db'
+});
+\end{lstlisting}
+
+\section{Frontend Development Tools}
+
+\subsection{EJS Templating}
+\textbf{Purpose:} Server-side rendering of dynamic content
+
+\textbf{Example:}
+\begin{lstlisting}[language=HTML]
+<% if (user) { %>
+  <p>Welcome, <%= user.name %>!</p>
+<% } else { %>
+  <a href="/login">Login</a>
+<% } %>
+\end{lstlisting}
+
+\subsection{Tailwind CSS}
+\textbf{Purpose:} Utility-first CSS framework for responsive design
+
+\textbf{Features:}
+\begin{itemize}
+\item Responsive grid layouts
+\item Custom color schemes
+\item Mobile-first approach
+\item Dark theme support
+\end{itemize}
+
+\section{Security and Validation Tools}
+
+\subsection{Input Validation}
+\textbf{Client-side:} HTML5 validation attributes
+\textbf{Server-side:} Custom validation middleware
+
+\subsection{Session Management}
+\textbf{Tool:} express-session
+\textbf{Configuration:}
+\begin{lstlisting}[language=JavaScript]
+app.use(session({
+  secret: 'secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    maxAge: 24 * 60 * 60 * 1000,
+    httpOnly: true 
+  }
+}));
+\end{lstlisting}
+
+\chapter{Implementation}illion annually by 2025 \citep{morgan2020cybersecurity}, with financial losses running into trillions of dollars annually. The types of cybercrimes have evolved from simple email scams to complex multi-stage attacks involving social engineering, advanced persistent threats, and sophisticated malware campaigns.
 
 Traditional reporting mechanisms for cybercrime often involve complex bureaucratic processes, multiple agencies, and lengthy procedures that discourage victims from reporting incidents. Many victims are unaware of proper reporting channels, lack technical knowledge to document incidents effectively, or fear that their reports will not be taken seriously or acted upon promptly.
 
@@ -139,13 +653,13 @@ Frontend technologies have evolved significantly with the introduction of modern
 
 \subsection{System Architecture Overview}
 
-The CyberGuard application follows a three-tier architecture pattern, separating the presentation layer, business logic layer, and data access layer to ensure maintainability, scalability, and security. This architectural approach enables independent development and deployment of different system components while maintaining clear separation of concerns.
+We built CyberGuard using a three-tier architecture that splits the system into presentation, business logic, and data layers. This separation makes the code easier to maintain and scale. Each layer can be developed and deployed independently, which really helped us during the development process.
 
-The presentation layer consists of responsive web interfaces built using EJS templating engine, HTML5, CSS3, and JavaScript. This layer handles user interactions, form submissions, and data presentation while ensuring accessibility across various devices and browsers. The responsive design approach ensures optimal user experience on desktop computers, tablets, and mobile devices.
+For the frontend, we used EJS templates along with HTML5, CSS3, and JavaScript to create responsive web pages. This layer takes care of everything users see and interact with - from filling out forms to viewing their reports. We made sure it works smoothly on desktops, tablets, and phones.
 
-The business logic layer is implemented using Node.js and Express.js framework, providing RESTful API endpoints for all system operations. This layer handles user authentication, authorization, input validation, business rule enforcement, and integration with external services. The modular design of this layer facilitates easy maintenance and feature additions.
+The middle layer runs on Node.js with Express.js, handling all the core functionality through RESTful APIs. Here's where we process user logins, validate inputs, enforce security rules, and manage integrations. We kept the code modular so adding new features later wouldn't be a headache.
 
-The data access layer utilizes both MySQL and PostgreSQL databases, with an abstraction layer that enables seamless switching between database systems based on deployment requirements. This layer handles data persistence, query optimization, and transaction management while ensuring data integrity and security.
+At the bottom, we have the database layer supporting both MySQL and PostgreSQL. We added an abstraction layer so we can switch between databases without rewriting code. This layer manages all data storage, optimizes queries, and keeps everything secure and consistent.
 
 \begin{center}
     
@@ -201,9 +715,9 @@ The following diagram illustrates the complete workflow of the CyberGuard system
 
 \subsection{Database Design}
 
-The database schema is designed to efficiently store and retrieve cybercrime reporting data while maintaining referential integrity and supporting complex queries for administrative functions. The schema consists of several interconnected tables that represent different aspects of the cybercrime reporting process.
+We designed our database schema to handle cybercrime reports efficiently while keeping data relationships intact. The schema has several tables that work together to store user information, incident reports, and educational content.
 
-The Users table serves as the central repository for user account information, storing essential details such as names, email addresses, phone numbers, and encrypted passwords. The table includes role-based access control fields that distinguish between regular users and administrative users, enabling appropriate access restrictions throughout the application.
+The Users table is where we store all account information - names, emails, phone numbers, and encrypted passwords. We included role fields to separate regular users from admins, which helps control who can access what features.
 
 The Reports table contains the core cybercrime incident data, including incident descriptions, categorizations, evidence file references, and status tracking information. This table maintains foreign key relationships with the Users table to associate reports with their submitters while preserving data integrity.
 
@@ -213,9 +727,9 @@ Additional supporting tables handle session management, audit logging, and syste
 
 \subsection{Security Architecture}
 
-Security considerations permeate every aspect of the CyberGuard system design, reflecting the sensitive nature of cybercrime reporting data and the need to protect both user privacy and system integrity. The security architecture implements multiple layers of protection, following industry best practices and established security frameworks.
+Security was our top priority throughout development. Since we're dealing with sensitive cybercrime data, we couldn't take any shortcuts. We implemented multiple security layers following industry standards like OWASP guidelines.
 
-Authentication mechanisms utilize bcrypt hashing for password storage \citep{bcrypt2023hashing}, ensuring that user credentials remain protected even in the event of database compromise. Session management employs secure, HTTP-only cookies with appropriate expiration policies to prevent session hijacking and unauthorized access.
+We use bcrypt to hash passwords before storing them \citep{bcrypt2023hashing}, so even if someone gets into our database, they can't read the actual passwords. For sessions, we went with HTTP-only cookies that expire after 24 hours to prevent hijacking attempts.
 
 Input validation and sanitization procedures are implemented at multiple levels, following OWASP security guidelines \citep{owasp2023top10}, including client-side validation for user experience enhancement and server-side validation for security enforcement. These measures protect against common web application vulnerabilities such as SQL injection, cross-site scripting (XSS), and cross-site request forgery (CSRF).
 
@@ -225,9 +739,9 @@ File upload security measures include file type validation, size restrictions, a
 
 \subsection{Backend Development}
 
-The backend implementation leverages the Node.js runtime environment and Express.js framework to create a robust, scalable server-side application. The modular architecture separates different functional areas into distinct modules, facilitating code organization, testing, and maintenance.
+We built the backend using Node.js and Express.js, which gave us the performance and flexibility we needed. Breaking everything into separate modules made testing and maintenance much simpler.
 
-The authentication module implements comprehensive user management functionality, including registration, login, logout, and session management. Password security utilizes the bcrypt library with appropriate salt rounds to ensure strong protection against rainbow table and brute force attacks. Session management employs the express-session middleware with secure configuration options.
+Our authentication module handles everything from user registration to login and logout. We're using bcrypt with 10 salt rounds for password hashing, which protects against rainbow table and brute force attacks. The express-session middleware manages user sessions with secure settings.
 
 The reporting module handles all aspects of cybercrime incident reporting, from initial form submission through case resolution. This module implements complex business logic for incident categorization, evidence handling, and status tracking. File upload functionality utilizes the Multer middleware \citep{multer2023upload} with custom configuration for security and storage management.
 
@@ -545,7 +1059,6 @@ Research opportunities include analysis of cybercrime reporting patterns, effect
 
 The project demonstrates that thoughtful application of modern web technologies can address complex social problems while providing valuable learning opportunities for developers, researchers, and policymakers working to improve cybersecurity outcomes for all citizens.
 
-\section{Works Cited}
 
 \begin{thebibliography}{99}
 
@@ -564,11 +1077,7 @@ Express.js Team. "Express.js Security Best Practices." \textit{Express.js Offici
 \bibitem{fbi2023cybercrime}
 FBI Internet Crime Complaint Center. \textit{Internet Crime Report 2023}. Federal Bureau of Investigation, 2023.
 
-\bibitem{ic3report2023}
-Internet Crime Complaint Center. "Annual Report 2023." \textit{IC3.gov}, FBI, 2023, ic3.gov/Media/PDF/AnnualReport/2023_IC3Report.pdf. Accessed 24 Nov. 2023.
 
-\bibitem{mdn2023responsive}
-Mozilla Developer Network. "Responsive Web Design." \textit{MDN Web Docs}, Mozilla Foundation, 2023, developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design. Accessed 24 Nov. 2023.
 
 \bibitem{morgan2020cybersecurity}
 Morgan, Steve. \textit{Cybersecurity Ventures 2021 Official Annual Cybercrime Report}. Cybersecurity Ventures, 2020.
@@ -585,8 +1094,6 @@ Node.js Foundation. "Node.js Performance Best Practices." \textit{Node.js Offici
 \bibitem{owasp2023top10}
 OWASP Foundation. "OWASP Top 10 Web Application Security Risks." \textit{OWASP.org}, 2023, owasp.org/www-project-top-ten. Accessed 24 Nov. 2023.
 
-\bibitem{postgresql2023security}
-PostgreSQL Global Development Group. "PostgreSQL Security Documentation." \textit{PostgreSQL Official Documentation}, 2023, postgresql.org/docs/current/security.html. Accessed 24 Nov. 2023.
 
 \bibitem{provos1999bcrypt}
 Provos, Niels, and David Mazi\`{e}res. "A Future-Adaptable Password Scheme." \textit{Proceedings of the FREENIX Track: 1999 USENIX Annual Technical Conference}, USENIX Association, 1999, pp. 81-91.
@@ -596,6 +1103,15 @@ Render Inc. "Cloud Deployment Documentation." \textit{Render Official Documentat
 
 \bibitem{tailwind2023css}
 Tailwind Labs. "Tailwind CSS Documentation." \textit{Tailwind CSS Official Site}, 2023, tailwindcss.com/docs. Accessed 24 Nov. 2023.
+
+
+\bibitem{postgresql2023security}
+PostgreSQL Global Development Group. "PostgreSQL Security Documentation." \textit{PostgreSQL Official Documentation}, 2023, postgresql.org/docs/current/security.html. Accessed 24 Nov. 2023.
+
+\bibitem{mdn2023responsive}
+Mozilla Developer Network. "Responsive Web Design." \textit{MDN Web Docs}, Mozilla Foundation, 2023, developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design. Accessed 24 Nov. 2023.
+\bibitem{ic3report2023}
+Internet Crime Complaint Center. "Annual Report 2023." \textit{IC3.gov}, FBI, 2023, ic3.gov/Media/PDF/AnnualReport/2023_IC3Report.pdf. Accessed 24 Nov. 2023.
 
 \end{thebibliography}
 
