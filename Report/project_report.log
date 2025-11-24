@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.6.14)  24 NOV 2025 10:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (MiKTeX 24.4) (preloaded format=pdflatex 2024.6.14)  24 NOV 2025 10:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -632,24 +632,24 @@ File: l3backend-pdftex.def 2024-05-08 L3 backend support: PDF output (pdfTeX)
 ) (project_report.aux)
 \openout1 = `project_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 28.
+LaTeX Font Info:    ... okay on input line 28.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -704,7 +704,7 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (C:\Users\priya\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
-Package hyperref Info: Link coloring OFF on input line 31.
+Package hyperref Info: Link coloring OFF on input line 28.
 \@outlinefile=\write4
 \openout4 = `project_report.out'.
 
@@ -712,11 +712,11 @@ Package hyperref Info: Link coloring OFF on input line 31.
 
 Package pgfplots notification 'compat/show suggested version=true': document has been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 34.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 31.
 (C:\Users\priya\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 34.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 31.
  (C:\Users\priya\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -732,248 +732,268 @@ No file project_report.toc.
 
 [2]
 
-Package natbib Warning: Citation `morgan2020cybersecurity' on page 3 undefined on input line 53.
+Package natbib Warning: Citation `morgan2020cybersecurity' on page 3 undefined on input line 64.
 
 
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [3]
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
 [4]
 
-Package natbib Warning: Citation `fbi2023cybercrime' on page 5 undefined on input line 101.
+Package natbib Warning: Citation `fbi2023cybercrime' on page 5 undefined on input line 112.
 
 
-Package natbib Warning: Citation `ic3report2023' on page 5 undefined on input line 107.
+Package natbib Warning: Citation `ic3report2023' on page 5 undefined on input line 118.
 
 
-Package natbib Warning: Citation `nodejs2023performance' on page 5 undefined on input line 117.
+Package natbib Warning: Citation `nodejs2023performance' on page 5 undefined on input line 128.
 
 
-Package natbib Warning: Citation `expressjs2023security' on page 5 undefined on input line 117.
+Package natbib Warning: Citation `expressjs2023security' on page 5 undefined on input line 128.
 
 
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [5]
 
-Package natbib Warning: Citation `postgresql2023security' on page 6 undefined on input line 119.
+Package natbib Warning: Citation `postgresql2023security' on page 6 undefined on input line 130.
 
 
-Package natbib Warning: Citation `mdn2023responsive' on page 6 undefined on input line 121.
+Package natbib Warning: Citation `mdn2023responsive' on page 6 undefined on input line 132.
 
 
+LaTeX Warning: File `System_Arch.png' not found on input line 152.
 
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+d:/SEM-7/CFIS/project/Report/project_report.tex:152: Package pdftex.def Error: File `System_Arch.png' not found: using draft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.152 ...ics[width=0.5\linewidth]{System_Arch.png}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:154: LaTeX Error: \caption outside float.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.154     \caption
+                  {System Architecture Overview}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:154: Undefined control sequence.
+\caption ... \endcsname \fi \fi \@dblarg {\@tempf 
+                                                  \@captype }
+l.154     \caption
+                  {System Architecture Overview}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:154: Undefined control sequence.
+\caption ...e \fi \fi \@dblarg {\@tempf \@captype 
+                                                  }
+l.154     \caption
+                  {System Architecture Overview}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
 
 [6]
 
+[7]
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[7
+[8
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.192 
+l.209 
       ]
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[8]
+Package natbib Warning: Citation `bcrypt2023hashing' on page 9 undefined on input line 218.
 
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+Package natbib Warning: Citation `owasp2023top10' on page 9 undefined on input line 220.
+
+
+Package natbib Warning: Citation `multer2023upload' on page 9 undefined on input line 232.
+
+
 
 [9]
 
+Package natbib Warning: Citation `ejs2023templating' on page 10 undefined on input line 240.
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+Package natbib Warning: Citation `tailwind2023css' on page 10 undefined on input line 246.
+
+
 
 [10]
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
 [11]
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
 [12]
-Overfull \hbox (25.9202pt too wide) in paragraph at lines 329--330
+
+[13]
+
+Package natbib Warning: Citation `render2023deployment' on page 14 undefined on input line 348.
+
+
+Overfull \hbox (25.9202pt too wide) in paragraph at lines 348--349
 \OT1/cmr/m/n/12 The de-ploy-ment strat-egy for Cy-ber-Guard em-pha-sizes re-li-a-bil-ity, se-cu-rity, and cost-effectiveness
  []
 
 
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[13]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
 [14]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [15]
 
+Package natbib Warning: Citation `nist2023framework' on page 16 undefined on input line 408.
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+Package natbib Warning: Citation `cisa2023guidelines' on page 16 undefined on input line 408.
+
+
 
 [16]
-Overfull \hbox (7.75787pt too wide) in paragraph at lines 451--452
+
+[17]
+Overfull \hbox (7.75787pt too wide) in paragraph at lines 470--471
 \OT1/cmr/m/n/12 Technical en-hance-ment op-por-tu-ni-ties fo-cus on per-for-mance op-ti-miza-tion, se-cu-rity strength-
  []
 
 
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[17]
-Overfull \hbox (4.36346pt too wide) in paragraph at lines 469--470
+[18]
+Overfull \hbox (4.36346pt too wide) in paragraph at lines 488--489
 []\OT1/cmr/m/n/12 Cybersecurity threat in-tel-li-gence in-te-gra-tion would pro-vide real-time in-for-ma-tion about
  []
 
 
-Overfull \hbox (6.02596pt too wide) in paragraph at lines 475--476
+Overfull \hbox (6.02596pt too wide) in paragraph at lines 494--495
 []\OT1/cmr/m/n/12 Educational in-sti-tu-tion part-ner-ships could fa-cil-i-tate cy-ber-se-cu-rity ed-u-ca-tion and aware-
  []
 
 
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[18]
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
 [19]
-Underfull \hbox (badness 2744) in paragraph at lines 540--541
-[]\OT1/cmr/m/n/12 IC3. (2023). \OT1/cmr/m/it/12 In-ter-net Crime Com-plaint Cen-ter An-nual Re-port\OT1/cmr/m/n/12 . Re-trieved from
- []
-
-
-Underfull \hbox (badness 1509) in paragraph at lines 543--544
-[]\OT1/cmr/m/n/12 Node.js Foun-da-tion. (2023). \OT1/cmr/m/it/12 Node.js Per-for-mance Best Prac-tices\OT1/cmr/m/n/12 . Re-trieved from
- []
-
-
-Underfull \hbox (badness 7888) in paragraph at lines 546--547
-[]\OT1/cmr/m/n/12 Express.js Team. (2023). \OT1/cmr/m/it/12 Ex-press.js Se-cu-rity Best Prac-tices\OT1/cmr/m/n/12 . Re-trieved from
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 552--553
-[]\OT1/cmr/m/n/12 Mozilla De-vel-oper Net-work. (2023). \OT1/cmr/m/it/12 Re-spon-sive Web De-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 552--553
-\OT1/cmr/m/it/12 sign\OT1/cmr/m/n/12 . Re-trieved from https://developer.mozilla.org/en-
- []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [20]
-Underfull \hbox (badness 10000) in paragraph at lines 564--565
-[]\OT1/cmr/m/n/12 Render Inc. (2023). \OT1/cmr/m/it/12 Cloud De-ploy-ment Doc-u-men-ta-tion\OT1/cmr/m/n/12 . Re-trieved from
+Underfull \hbox (badness 1953) in paragraph at lines 553--554
+[]\OT1/cmr/m/n/12 Bcrypt De-vel-op-ment Team. "Bcrypt Pass-word Hash-ing Li-brary." \OT1/cmr/m/it/12 GitHub\OT1/cmr/m/n/12 , 2023,
+ []
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:568: Missing $ inserted.
+<inserted text> 
+                $
+l.568 ...023, ic3.gov/Media/PDF/AnnualReport/2023_
+                                                  IC3Report.pdf. Accessed 24...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:569: Missing $ inserted.
+<inserted text> 
+                $
+l.569 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:569: Missing } inserted.
+<inserted text> 
+                }
+l.569 
+      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Underfull \hbox (badness 2042) in paragraph at lines 568--569
+[]\OT1/cmr/m/n/12 Internet Crime Com-plaint Cen-ter. "An-nual Re-port 2023." \OT1/cmr/m/it/12 IC3.gov\OT1/cmr/m/n/12 , FBI, 2023,
+ []
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:569: Extra }, or forgotten \endgroup.
+\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
+                                                  \fi 
+l.569 
+      
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:571: Missing $ inserted.
+<inserted text> 
+                $
+l.571 ...per.mozilla.org/en-US/docs/Learn/CSS/CSS_
+                                                  layout/Responsive_Design. ...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:572: Missing $ inserted.
+<inserted text> 
+                $
+l.572 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+d:/SEM-7/CFIS/project/Report/project_report.tex:572: Missing } inserted.
+<inserted text> 
+                }
+l.572 
+      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 571--572
+[]\OT1/cmr/m/n/12 Mozilla De-vel-oper Net-work. "Re-spon-sive Web De-sign." \OT1/cmr/m/it/12 MDN
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 570--571
-[]\OT1/cmr/m/n/12 Tailwind Labs. (2023). \OT1/cmr/m/it/12 Tail-wind CSS Doc-u-men-ta-tion\OT1/cmr/m/n/12 . Re-trieved from
+Underfull \hbox (badness 10000) in paragraph at lines 571--572
+\OT1/cmr/m/it/12 Web Docs\OT1/cmr/m/n/12 , Mozilla Foun-da-tion, 2023, developer.mozilla.org/en-
+ []
+
+
+
+[21]
+d:/SEM-7/CFIS/project/Report/project_report.tex:572: Extra }, or forgotten \endgroup.
+\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
+                                                  \fi 
+l.572 
+      
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+
+Underfull \hbox (badness 7256) in paragraph at lines 577--578
+[]\OT1/cmr/m/n/12 Multer De-vel-op-ment Team. "Mul-ter File Up-load Mid-dle-ware." \OT1/cmr/m/it/12 GitHub\OT1/cmr/m/n/12 , 2023,
  []
 
 
@@ -981,27 +1001,20 @@ Package natbib Warning: There were undefined citations.
 
 
 
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[21] (project_report.aux
+[22] (project_report.aux
 
 Package natbib Warning: Citation(s) may have changed.
 (natbib)                Rerun to get citations correct.
 
 
-project_report.aux:79: Package natbib Error: Bibliography not compatible with author-year citations.
+project_report.aux:88: Package natbib Error: Bibliography not compatible with author-year citations.
 (natbib)                Press <return> to continue in numerical citation style.
 
 See the natbib package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.79 ...mand\NAT@force@numbers{}\NAT@force@numbers
+l.88 ...mand\NAT@force@numbers{}\NAT@force@numbers
                                                   
 Check the bibliography entries for non-compliant syntax,
 or select author-year BibTeX style, e.g. plainnat
@@ -1022,20 +1035,14 @@ Package rerunfilecheck Warning: File `project_report.out' has changed.
 
 Package rerunfilecheck Info: Checksums for `project_report.out':
 (rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  7AA6CF94BBF7BAAEA88BB21689C0A3B0;8220.
+(rerunfilecheck)             After:  8799AABAEE50D7427114F0F9D6CC8F39;8228.
  ) 
 Here is how much of TeX's memory you used:
- 35757 strings out of 473938
- 835137 string characters out of 5727391
- 1941893 words of memory out of 5000000
- 57969 multiletter control sequences out of 15000+600000
- 563169 words of font info for 55 fonts, out of 8000000 for 9000
+ 35827 strings out of 473938
+ 836423 string characters out of 5727391
+ 1937893 words of memory out of 5000000
+ 58027 multiletter control sequences out of 15000+600000
+ 568634 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,87p,764b,854s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\priya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/priya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/priya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/priya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/priya/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on project_report.pdf (21 pages, 148065 bytes).
-PDF statistics:
- 207 PDF objects out of 1000 (max. 8388607)
- 87 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 84i,8n,87p,764b,854s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\priya\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk>

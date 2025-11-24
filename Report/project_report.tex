@@ -19,20 +19,16 @@
 \pgfplotsset{compat=1.18}
 
 \title{CyberGuard: A Comprehensive Cybercrime Prevention and Reporting Web Application}
-\author{Priyanshu Kumar Sharma}
+\author{Priyanshu Kumar Sharma, Vaibhav Gulge \\ BTech IT (CTIS) | SEM: 7}
 \date{\today}
 
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{CyberGuard Project Report}
-\lhead{CFIS - SEM 7}
+
 \cfoot{\thepage}
 
 \begin{document}
 
 \maketitle
 
-\newpage
 \begin{abstract}
 Cybercrime has emerged as one of the most significant threats in our digital society, with damages projected to reach \$10.5 trillion annually by 2025. Traditional cybercrime reporting mechanisms often involve complex bureaucratic processes that discourage victims from reporting incidents. This project presents CyberGuard, a comprehensive web-based cybercrime prevention and reporting system designed to bridge the gap between cybercrime victims and law enforcement agencies.
 
@@ -151,6 +147,14 @@ The business logic layer is implemented using Node.js and Express.js framework, 
 
 The data access layer utilizes both MySQL and PostgreSQL databases, with an abstraction layer that enables seamless switching between database systems based on deployment requirements. This layer handles data persistence, query optimization, and transaction management while ensuring data integrity and security.
 
+\begin{center}
+    
+    \includegraphics[width=0.5\linewidth]{System_Arch.png}
+    \newline
+    \caption{System Architecture Overview}
+    \label{fig:placeholder}
+\end{center}
+
 \subsection{System Workflow Diagram}
 
 The following diagram illustrates the complete workflow of the CyberGuard system, from user registration through report resolution:
@@ -166,9 +170,9 @@ The following diagram illustrates the complete workflow of the CyberGuard system
 
 % Place nodes
 \node (start) [startstop] {User Access};
-\node (register) [decision, below of=start] {Registered?};
-\node (signup) [process, left of=register, xshift=-2cm] {Registration};
-\node (login) [process, below of=register] {Login};
+\node (register) [decision, below of=start, yshift=-1.75cm] {Registered?};
+\node (signup) [process, left of=register, xshift=-2.5cm] {Registration};
+\node (login) [process, below of=register, yshift=-2cm] {Login};
 \node (dashboard) [process, below of=login] {Dashboard};
 \node (report) [process, below of=dashboard] {Create Report};
 \node (submit) [process, below of=report] {Submit Evidence};
