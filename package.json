@@ -7,7 +7,8 @@
     "dev:astro": "astro dev",
     "dev": "concurrently \"npm:dev:server\" \"npm:dev:astro\"",
     "start": "node app.js",
-    "build": "astro build",
+    "build": "echo 'Express app ready'",
+    "build:astro": "astro build",
     "preview": "astro preview",
     "build:css": "tailwindcss -i src/styles/tailwind.css -o public/css/tailwind.css --minify",
     "watch:css": "tailwindcss -i src/styles/tailwind.css -o public/css/tailwind.css --watch"

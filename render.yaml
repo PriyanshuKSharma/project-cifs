@@ -21,7 +21,6 @@ services:
   region: oregon
   buildCommand: |
     npm install
-    npm run build
     mkdir -p uploads
   startCommand: npm start
   autoDeployTrigger: commit
