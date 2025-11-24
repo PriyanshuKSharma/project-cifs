@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../config/db');
+const Solution = require('../models/Solution');
 
 // Public: get all tips (JSON)
 router.get('/tips', async (req, res) => {
@@ -81,6 +82,17 @@ router.patch('/admin/report/:id/status', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ ok: false, error: 'DB error' });
+  }
+});
+
+// Get temporary solution by incident type
+router.get('/solution/:incidentType', (req, res) => {
+  try {
+    const solution = Solution.getSolutionByIncidentType(req.params.incidentType);
+    res.json({ ok: true, solution });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, error: 'Error getting solution' });
   }
 });
 

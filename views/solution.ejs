@@ -1,0 +1,230 @@
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <div class="container">
+        <div class="form-header">
+            <h1>🚨 <%= solution.title %></h1>
+            <div class="urgency-badge urgency-<%= solution.urgency %>">
+                <i class="fas fa-exclamation-triangle"></i>
+                <%= solution.urgency.toUpperCase() %> PRIORITY
+            </div>
+            <p class="timeframe"><strong>⏰ <%= solution.timeframe %></strong></p>
+        </div>
+
+        <div class="solution-content">
+            <!-- Immediate Actions -->
+            <div class="solution-section">
+                <h2><i class="fas fa-bolt"></i> Immediate Actions</h2>
+                <div class="steps-list">
+                    <% solution.steps.forEach((step, index) => { %>
+                        <div class="step-item">
+                            <span class="step-number"><%= index + 1 %></span>
+                            <span class="step-text"><%= step %></span>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <!-- Prevention Tips -->
+            <div class="solution-section">
+                <h2><i class="fas fa-shield-alt"></i> Prevention for Future</h2>
+                <div class="prevention-list">
+                    <% solution.prevention.forEach((tip) => { %>
+                        <div class="prevention-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span><%= tip %></span>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <!-- Emergency Contacts -->
+            <div class="solution-section emergency-contacts">
+                <h2><i class="fas fa-phone"></i> Emergency Contacts</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <strong>Cybercrime Helpline</strong>
+                        <span>1930</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Police Emergency</strong>
+                        <span>100</span>
+                    </div>
+                    <div class="contact-item">
+                        <strong>Banking Fraud</strong>
+                        <span>1800-425-3800</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <a href="/report/new" class="btn btn-primary">
+                    <i class="fas fa-file-alt"></i>
+                    File Official Report
+                </a>
+                <a href="/tips" class="btn btn-secondary">
+                    <i class="fas fa-lightbulb"></i>
+                    More Security Tips
+                </a>
+                <button onclick="window.print()" class="btn btn-outline">
+                    <i class="fas fa-print"></i>
+                    Print This Guide
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+
+<style>
+.urgency-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin: 10px 0;
+}
+
+.urgency-critical {
+    background: #ff4444;
+    color: white;
+}
+
+.urgency-high {
+    background: #ff8800;
+    color: white;
+}
+
+.urgency-medium {
+    background: #ffaa00;
+    color: white;
+}
+
+.timeframe {
+    background: #f8f9fa;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    margin: 15px 0;
+    font-size: 1.1em;
+}
+
+.solution-section {
+    background: white;
+    padding: 25px;
+    margin: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.solution-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.4em;
+}
+
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #007bff;
+}
+
+.step-number {
+    background: #007bff;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.step-text {
+    flex: 1;
+    line-height: 1.5;
+}
+
+.prevention-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.prevention-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: #f0f8f0;
+    border-radius: 6px;
+}
+
+.prevention-item i {
+    color: #28a745;
+    font-size: 1.2em;
+}
+
+.emergency-contacts {
+    background: #fff5f5 !important;
+    border: 2px solid #ff6b6b;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.contact-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid #ff6b6b;
+}
+
+.contact-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.contact-item span {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<%- include('partials/footer') %>

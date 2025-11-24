@@ -14,18 +14,23 @@
                 
                 <div class="form-group">
                     <label for="incident_type">Incident Type *</label>
-                    <select id="incident_type" name="incident_type" required>
+                    <select id="incident_type" name="incident_type" required onchange="showSolutionButton()">
                         <option value="">Select incident type</option>
-                        <option value="Phishing">Phishing</option>
-                        <option value="Identity Theft">Identity Theft</option>
-                        <option value="Online Fraud">Online Fraud</option>
-                        <option value="Cyberbullying">Cyberbullying</option>
-                        <option value="Hacking">Hacking</option>
-                        <option value="Ransomware">Ransomware</option>
-                        <option value="Data Breach">Data Breach</option>
-                        <option value="Social Media Scam">Social Media Scam</option>
-                        <option value="Other">Other</option>
+                        <option value="phishing">Phishing</option>
+                        <option value="identity_theft">Identity Theft</option>
+                        <option value="financial_fraud">Financial Fraud</option>
+                        <option value="cyberbullying">Cyberbullying</option>
+                        <option value="ransomware">Ransomware</option>
+                        <option value="social_media_fraud">Social Media Fraud</option>
+                        <option value="online_shopping_fraud">Online Shopping Fraud</option>
+                        <option value="email_scam">Email Scam</option>
+                        <option value="other">Other</option>
                     </select>
+                    <div id="solutionButton" style="display: none; margin-top: 15px;">
+                        <a href="#" onclick="getSolution()" class="btn btn-warning" style="background: #ff6b35; border-color: #ff6b35;">
+                            <i class="fas fa-lightbulb"></i> Get Immediate Help & Solutions
+                        </a>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -84,5 +89,25 @@
         </div>
     </div>
 </main>
+
+<script>
+function showSolutionButton() {
+    const select = document.getElementById('incident_type');
+    const button = document.getElementById('solutionButton');
+    
+    if (select.value) {
+        button.style.display = 'block';
+    } else {
+        button.style.display = 'none';
+    }
+}
+
+function getSolution() {
+    const incidentType = document.getElementById('incident_type').value;
+    if (incidentType) {
+        window.open('/solution/' + incidentType, '_blank');
+    }
+}
+</script>
 
 <%- include('partials/footer') %>

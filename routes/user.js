@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const Report = require('../models/Report');
 const Tip = require('../models/Tip');
+const Solution = require('../models/Solution');
 
 // Multer configuration for file uploads
 const storage = multer.diskStorage({
@@ -107,5 +108,16 @@ router.get('/report/:id', requireAuth, async (req, res) => {
 });
 
 
+
+// Get temporary solution for incident type
+router.get('/solution/:incidentType', (req, res) => {
+  try {
+    const solution = Solution.getSolutionByIncidentType(req.params.incidentType);
+    res.render('solution', { solution, incidentType: req.params.incidentType });
+  } catch (error) {
+    req.flash('error', 'Error loading solution');
+    res.redirect('/report/new');
+  }
+});
 
 module.exports = router;
