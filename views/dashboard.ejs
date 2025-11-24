@@ -1,17 +1,10 @@
 <%- include('partials/header') %>
 
 <main class="main-content">
-    <div class="dashboard-container">
-        <div class="dashboard-header" style="text-align: center; margin-bottom: 3rem;">
-            <div style="display: inline-flex; align-items: center; gap: 1rem; background: rgba(102,126,234,0.1); padding: 1rem 2rem; border-radius: 50px; margin-bottom: 1rem;">
-                <div style="width: 50px; height: 50px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-user" style="color: white; font-size: 1.2rem;"></i>
-                </div>
-                <div style="text-align: left;">
-                    <h1 style="margin: 0; color: #2d3748; font-size: 1.8rem;">👋 Welcome back, <%= user.name %>!</h1>
-                    <p style="margin: 0; color: #718096; font-size: 0.9rem;">Your digital safety command center</p>
-                </div>
-            </div>
+    <div class="container">
+        <div class="dashboard-header">
+            <h1>Welcome, <%= user.name %>!</h1>
+            <p>Manage your reports and stay informed about cybercrime prevention</p>
         </div>
 
         <div class="dashboard-stats">
@@ -38,63 +31,64 @@
             </div>
         </div>
 
-        <div class="dashboard-actions" style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap;">
-            <a href="/report/new" class="btn btn-primary" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
-                <i class="fas fa-exclamation-triangle"></i> 🚨 Report Incident
+        <div class="dashboard-actions">
+            <a href="/report/new" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Submit New Report
             </a>
             <a href="/reports" class="btn btn-secondary">
-                <i class="fas fa-history"></i> 📈 My Reports
+                <i class="fas fa-folder-open"></i> View All Reports
             </a>
-            <a href="/tips" class="btn btn-secondary">
-                <i class="fas fa-shield-alt"></i> 🛡️ Safety Tips
+            <a href="/tips" class="btn btn-outline">
+                <i class="fas fa-lightbulb"></i> Prevention Tips
             </a>
         </div>
 
         <div class="dashboard-content">
             <div class="recent-reports">
-                <h2>Recent Reports</h2>
+                <h2><i class="fas fa-history"></i> Recent Reports</h2>
                 <% if (reports.length > 0) { %>
                     <div class="reports-list">
-                        <% reports.forEach(function(report) { %>
-                        <div class="report-item">
-                            <div class="report-info">
-                                <h4><%= report.incident_type %></h4>
-                                <p><%= report.description.substring(0, 100) %>...</p>
-                                <small>Submitted: <%= new Date(report.created_at).toLocaleDateString() %></small>
+                        <% reports.slice(0, 5).forEach(report => { %>
+                            <div class="report-item">
+                                <div class="report-info">
+                                    <h4><%= report.incident_type %></h4>
+                                    <p><%= report.description.substring(0, 100) %>...</p>
+                                    <small><i class="fas fa-calendar"></i> <%= new Date(report.created_at).toLocaleDateString() %></small>
+                                </div>
+                                <div class="report-status">
+                                    <span class="status-badge status-<%= report.status %>"><%= report.status %></span>
+                                    <a href="/report/<%= report.id %>" class="btn btn-sm btn-outline">View</a>
+                                </div>
                             </div>
-                            <div class="report-status">
-                                <span class="status-badge status-<%= report.status %>">
-                                    <%= report.status.charAt(0).toUpperCase() + report.status.slice(1) %>
-                                </span>
-                                <a href="/report/<%= report.id %>" class="btn btn-sm">View</a>
-                            </div>
-                        </div>
                         <% }); %>
                     </div>
                 <% } else { %>
                     <div class="empty-state">
                         <i class="fas fa-inbox"></i>
-                        <h3>No reports yet</h3>
-                        <p>Start by reporting your first cybercrime incident</p>
+                        <h3>No Reports Yet</h3>
+                        <p>You haven't submitted any reports. Click below to report a cybercrime incident.</p>
+                        <a href="/report/new" class="btn btn-primary" style="margin-top: 1rem;">
+                            <i class="fas fa-plus"></i> Submit First Report
+                        </a>
                     </div>
                 <% } %>
             </div>
 
             <div class="safety-tips">
-                <h2>Safety Tips</h2>
-                <% if (tips.length > 0) { %>
-                    <div class="tips-list">
-                        <% tips.forEach(function(tip) { %>
-                        <div class="tip-item">
-                            <h4><%= tip.title %></h4>
-                            <p><%= tip.content.substring(0, 120) %>...</p>
-                        </div>
-                        <% }); %>
-                    </div>
-                    <a href="/tips" class="btn btn-outline">View All Tips</a>
-                <% } else { %>
-                    <p>No tips available at the moment.</p>
-                <% } %>
+                <h2><i class="fas fa-shield-alt"></i> Safety Tips</h2>
+                <div class="tip-card">
+                    <h3>Stay Protected Online</h3>
+                    <ul style="color: var(--text-muted); line-height: 2;">
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Use strong, unique passwords</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Enable two-factor authentication</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Be cautious of phishing emails</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Keep software updated</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Use secure networks</li>
+                    </ul>
+                    <a href="/tips" class="btn btn-outline btn-full" style="margin-top: 1rem;">
+                        View All Tips <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>

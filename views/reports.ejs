@@ -3,46 +3,95 @@
 <main class="main-content">
     <div class="container">
         <div class="dashboard-header">
-            <h1>My Reports</h1>
-            <p>Track the status of your cybercrime reports</p>
+            <h1><i class="fas fa-folder-open"></i> My Reports</h1>
+            <p>Track and manage all your submitted cybercrime reports</p>
         </div>
 
         <div class="dashboard-actions">
             <a href="/report/new" class="btn btn-primary">
-                <i class="fas fa-plus"></i> New Report
+                <i class="fas fa-plus"></i> Submit New Report
             </a>
         </div>
 
         <% if (reports.length > 0) { %>
             <div class="reports-list">
-                <% reports.forEach(function(report) { %>
-                <div class="report-item">
-                    <div class="report-info">
-                        <h4><%= report.incident_type %></h4>
-                        <p><%= report.description.substring(0, 150) %>...</p>
-                        <small>
-                            <i class="fas fa-calendar"></i> Submitted: <%= new Date(report.created_at).toLocaleDateString() %>
-                            | <i class="fas fa-clock"></i> Incident Date: <%= new Date(report.incident_date).toLocaleDateString() %>
-                        </small>
+                <% reports.forEach(report => { %>
+                    <div class="report-item">
+                        <div class="report-info">
+                            <h4><i class="fas fa-exclamation-circle"></i> <%= report.incident_type %></h4>
+                            <p><%= report.description.substring(0, 150) %><%= report.description.length > 150 ? '...' : '' %></p>
+                            <div style="display: flex; gap: 1.5rem; margin-top: 0.75rem;">
+                                <small><i class="fas fa-calendar"></i> <%= new Date(report.created_at).toLocaleDateString() %></small>
+                                <% if (report.incident_date) { %>
+                                    <small><i class="fas fa-clock"></i> Incident: <%= new Date(report.incident_date).toLocaleDateString() %></small>
+                                <% } %>
+                                <% if (report.location) { %>
+                                    <small><i class="fas fa-map-marker-alt"></i> <%= report.location %></small>
+                                <% } %>
+                            </div>
+                        </div>
+                        <div class="report-status">
+                            <span class="status-badge status-<%= report.status %>">
+                                <% if (report.status === 'pending') { %>
+                                    <i class="fas fa-clock"></i>
+                                <% } else if (report.status === 'review') { %>
+                                    <i class="fas fa-search"></i>
+                                <% } else if (report.status === 'resolved') { %>
+                                    <i class="fas fa-check"></i>
+                                <% } else if (report.status === 'rejected') { %>
+                                    <i class="fas fa-times"></i>
+                                <% } %>
+                                <%= report.status %>
+                            </span>
+                            <a href="/report/<%= report.id %>" class="btn btn-sm btn-outline">
+                                <i class="fas fa-eye"></i> View Details
+                            </a>
+                        </div>
                     </div>
-                    <div class="report-status">
-                        <span class="status-badge status-<%= report.status %>">
-                            <%= report.status.charAt(0).toUpperCase() + report.status.slice(1) %>
-                        </span>
-                        <a href="/report/<%= report.id %>" class="btn btn-sm">
-                            <i class="fas fa-eye"></i> View Details
-                        </a>
-                    </div>
-                </div>
                 <% }); %>
             </div>
         <% } else { %>
             <div class="empty-state">
                 <i class="fas fa-inbox"></i>
-                <h3>No reports submitted yet</h3>
-                <p>Start by reporting your first cybercrime incident to help make the internet safer</p>
+                <h3>No Reports Found</h3>
+                <p>You haven't submitted any reports yet. Start by reporting a cybercrime incident.</p>
+                <a href="/report/new" class="btn btn-primary" style="margin-top: 1.5rem;">
+                    <i class="fas fa-plus"></i> Submit Your First Report
+                </a>
             </div>
         <% } %>
+
+        <div class="card" style="margin-top: 3rem; background: rgba(99, 102, 241, 0.05); border-color: var(--primary);">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">
+                <i class="fas fa-info-circle"></i> Report Status Guide
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                <div>
+                    <span class="status-badge status-pending" style="display: inline-block; margin-bottom: 0.5rem;">
+                        <i class="fas fa-clock"></i> Pending
+                    </span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Report submitted and awaiting review</p>
+                </div>
+                <div>
+                    <span class="status-badge status-review" style="display: inline-block; margin-bottom: 0.5rem;">
+                        <i class="fas fa-search"></i> Review
+                    </span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Under investigation by our team</p>
+                </div>
+                <div>
+                    <span class="status-badge status-resolved" style="display: inline-block; margin-bottom: 0.5rem;">
+                        <i class="fas fa-check"></i> Resolved
+                    </span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Case closed with resolution</p>
+                </div>
+                <div>
+                    <span class="status-badge status-rejected" style="display: inline-block; margin-bottom: 0.5rem;">
+                        <i class="fas fa-times"></i> Rejected
+                    </span>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">Report did not meet criteria</p>
+                </div>
+            </div>
+        </div>
     </div>
 </main>
 

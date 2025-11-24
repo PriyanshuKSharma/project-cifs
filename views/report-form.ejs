@@ -3,13 +3,14 @@
 <main class="main-content">
     <div class="form-container">
         <div class="form-header">
-            <h1><i class="fas fa-exclamation-triangle"></i> Report Cybercrime</h1>
-            <p>Provide detailed information about the cybercrime incident</p>
+            <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+            <h1>Report Cybercrime Incident</h1>
+            <p>Provide detailed information about the incident to help us investigate</p>
         </div>
 
         <form action="/report/new" method="POST" enctype="multipart/form-data" class="report-form">
             <div class="form-section">
-                <h3>Incident Details</h3>
+                <h3><i class="fas fa-info-circle"></i> Incident Information</h3>
                 
                 <div class="form-group">
                     <label for="incident_type">Incident Type *</label>
@@ -17,12 +18,12 @@
                         <option value="">Select incident type</option>
                         <option value="Phishing">Phishing</option>
                         <option value="Identity Theft">Identity Theft</option>
-                        <option value="Financial Fraud">Financial Fraud</option>
+                        <option value="Online Fraud">Online Fraud</option>
                         <option value="Cyberbullying">Cyberbullying</option>
+                        <option value="Hacking">Hacking</option>
                         <option value="Ransomware">Ransomware</option>
-                        <option value="Social Media Fraud">Social Media Fraud</option>
-                        <option value="Online Shopping Fraud">Online Shopping Fraud</option>
-                        <option value="Email Scam">Email Scam</option>
+                        <option value="Data Breach">Data Breach</option>
+                        <option value="Social Media Scam">Social Media Scam</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
@@ -30,16 +31,31 @@
                 <div class="form-group">
                     <label for="incident_date">Incident Date *</label>
                     <input type="date" id="incident_date" name="incident_date" required max="<%= new Date().toISOString().split('T')[0] %>">
+                    <small>When did the incident occur?</small>
                 </div>
 
                 <div class="form-group">
-                    <label for="description">Detailed Description *</label>
-                    <textarea id="description" name="description" rows="6" required 
-                              placeholder="Please provide a detailed description of the incident, including what happened, when it occurred, and any relevant details..."></textarea>
+                    <label for="location">Location (Optional)</label>
+                    <input type="text" id="location" name="location" placeholder="City, State or Online Platform">
+                    <small>Where did the incident take place?</small>
                 </div>
+            </div>
 
+            <div class="form-section">
+                <h3><i class="fas fa-file-alt"></i> Incident Details</h3>
+                
                 <div class="form-group">
-                    <label for="evidence">Evidence (Optional)</label>
+                    <label for="description">Description *</label>
+                    <textarea id="description" name="description" rows="8" required placeholder="Provide a detailed description of the incident including what happened, who was involved, and any relevant details..."></textarea>
+                    <small>Be as detailed as possible to help with the investigation</small>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3><i class="fas fa-paperclip"></i> Evidence</h3>
+                
+                <div class="form-group">
+                    <label for="evidence">Upload Evidence (Optional)</label>
                     <input type="file" id="evidence" name="evidence" accept=".jpg,.jpeg,.png,.gif,.pdf,.doc,.docx">
                     <small>Supported formats: JPG, PNG, GIF, PDF, DOC, DOCX (Max 5MB)</small>
                 </div>
@@ -49,28 +65,22 @@
                 <button type="submit" class="btn btn-primary">
                     <i class="fas fa-paper-plane"></i> Submit Report
                 </button>
-                <a href="/dashboard" class="btn btn-secondary">Cancel</a>
+                <a href="/reports" class="btn btn-secondary">
+                    <i class="fas fa-times"></i> Cancel
+                </a>
             </div>
         </form>
 
-        <div class="help-section">
-            <h3>Need Help?</h3>
-            <div class="help-content">
-                <div class="help-item">
-                    <i class="fas fa-phone"></i>
-                    <div>
-                        <h4>Emergency Helpline</h4>
-                        <p>Call 1930 for immediate assistance</p>
-                    </div>
-                </div>
-                <div class="help-item">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <h4>Email Support</h4>
-                        <p>report@cybercrime.gov.in</p>
-                    </div>
-                </div>
-            </div>
+        <div class="card" style="margin-top: 2rem; background: rgba(99, 102, 241, 0.1); border-color: var(--primary);">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">
+                <i class="fas fa-info-circle"></i> Important Information
+            </h3>
+            <ul style="color: var(--text-muted); line-height: 2;">
+                <li>All reports are confidential and will be reviewed by our team</li>
+                <li>You will receive updates on your report status via email</li>
+                <li>For emergencies, please contact local law enforcement immediately</li>
+                <li>False reports may result in legal consequences</li>
+            </ul>
         </div>
     </div>
 </main>
